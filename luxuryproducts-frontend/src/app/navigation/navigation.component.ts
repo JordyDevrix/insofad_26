@@ -15,6 +15,7 @@ import { AuthService } from '../auth/auth.service';
 export class NavigationComponent implements OnInit {
   public amountOfProducts: number = 0;
   public userIsLoggedIn: boolean = false;
+  private adminPrivileges : boolean = false;
   userClass = "dropdown-menu dropdown-menu-end"
 
   constructor(private cartService: CartService,
@@ -38,6 +39,7 @@ export class NavigationComponent implements OnInit {
 
   public onLogout() {
     this.authService.logOut();
+    this.authService.clearUserRole();
     this.router.navigate(['/'])
   }
 

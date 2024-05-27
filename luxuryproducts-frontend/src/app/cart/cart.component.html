@@ -45,7 +45,6 @@
 </section>
 
 <hr>
-
 <div style="display: flex; justify-content: center;">
   <section class="overviewContainer p-3">
     <h4 style="margin-bottom: 1rem;">Overview</h4>
@@ -53,10 +52,23 @@
       <p>Products ({{ cartProducts.length }}):</p> 
       <p>{{ productsPrice | currency }}</p>
     </div>
+    
     <div class="overviewItem">
       <p>Shipping costs:</p> 
       <p>{{ shippingCosts | currency }}</p>
     </div>
+
+    <div class="overviewItem">
+      <p>Korting:</p> 
+      <p>{{ shippingCosts | currency }}</p>
+    </div>
+
+    <div class="coupon-container">
+      <h4>Enter Your Coupon Code</h4>
+      <input type="text" class="coupon-input" id="couponCode" placeholder="Enter coupon code">
+      <button class="submit-button" onclick="submitCoupon()">Submit</button>
+          </div>
+
     <hr style="margin: 0.5rem 0;">
     <div class="overviewItem">
       @if (cartProducts.length) {
@@ -64,9 +76,11 @@
         <p>{{ totalPrice | currency }}</p>
       }
     </div>
+
     <div style="text-align: center;">
       <button type="button" class="col-md-8" id="orderButton" 
       (click)="onPlaceOrder()">Place order</button>
     </div>
   </section>
+  
 </div>

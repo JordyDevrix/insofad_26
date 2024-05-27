@@ -1,1 +1,18 @@
-<p>coupons works!</p>
+<section class="cartContainer">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 style="margin: 1.5rem">Coupons</h4>
+        <hr>
+        <div class="innerContainer" *ngIf="coupons && coupons.length > 0">
+            <div *ngFor="let coupon of coupons">
+                <h3>{{ coupon.title }}</h3>
+                <p>{{ coupon.message }}</p>
+                <p>Discount: {{coupon.price}} {{ coupon.type }}</p>
+            </div>
+        </div>
+            <div class="innerContainer" *ngIf="!coupons || coupons.length === 0">
+                <p>No coupons available.</p>
+            </div>
+        </div>
+    </div>
+  </section>

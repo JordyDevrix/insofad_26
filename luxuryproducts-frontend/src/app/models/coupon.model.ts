@@ -2,7 +2,7 @@ import { CouponType } from "./coupontype.model";
 
 export class Coupon {
 
-id: number;
+id?: number;
 title: string;
 message: string;
 amount: number;
@@ -22,5 +22,6 @@ constructor(id: number, title: string, message: string, amount : number, price :
     this.startDate = startDate;
     this.endDate = endDate;
     this.type = type;
+    this.status = status;
     }
 }

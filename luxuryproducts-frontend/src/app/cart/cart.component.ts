@@ -6,6 +6,7 @@ import { Product } from '../models/product.model';
 import { OrderService } from '../services/order.service';
 import { AuthService } from '../auth/auth.service';
 import { Order } from '../models/order.model';
+import { CouponService } from '../services/coupon.service';
 
 @Component({
   selector: 'app-cart',
@@ -27,7 +28,8 @@ export class CartComponent implements OnInit {
 
   constructor(private cartService: CartService,
     private orderService: OrderService,
-    private authService: AuthService) {}
+    private authService: AuthService,
+    private couponService: CouponService) {}
 
   ngOnInit() {
     this.cartProducts = this.cartService.allProductsInCart();

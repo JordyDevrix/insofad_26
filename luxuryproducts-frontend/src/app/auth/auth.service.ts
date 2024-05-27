@@ -20,10 +20,15 @@ export class AuthService {
   public $userIsLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private currentUser = new BehaviorSubject<any>(null);
 
+  private currentUserRoleSubject: BehaviorSubject<string>;
+  public currentUserRole: Observable<string>;
+
   constructor(private http: HttpClient, private tokenService: TokenService) {
     if (this.tokenService.isValid()) {
       this.$userIsLoggedIn.next(true);
       this.checkCurrentUser();
+      this.currentUserRoleSubject = new BehaviorSubject<string>(localStorage.getItem('userRole') || 'USER');
+      this.currentUserRole = this.currentUserRoleSubject.asObservable();
     }
   }
 
@@ -74,7 +79,27 @@ export class AuthService {
     return this.http.get<Customer>(this.getUser)
   }
 
-  public isAdmin() {
-
+  // Call this method when the user logs in
+  setUserRole(role: string) {
+    localStorage.setItem('userRole', role);
+    this.currentUserRoleSubject.next(role);
   }
+
+  // Call this method when the user logs out
+  clearUserRole() {
+    localStorage.removeItem('userRole');
+    this.currentUserRoleSubject.next('USER');
+  }
+
+  // Method to check if the current user is an admin
+  // isAdmin(): boolean {
+  //   if (this.currentUserRoleSubject) {
+  //     return this.currentUserRoleSubject.value === 'ADMIN';
+  //   } 
+  //   else {
+  //    this.currentUserRole = this.setUserRole;
+  //   } 
+    
+    
+  
 }

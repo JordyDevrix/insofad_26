@@ -1,14 +1,8 @@
 package org.example.swordsnstuffapi.utils;
 
 import org.example.swordsnstuffapi.controller.ProductController;
-import org.example.swordsnstuffapi.dao.CategoryRepository;
-import org.example.swordsnstuffapi.dao.OrderRepository;
-import org.example.swordsnstuffapi.dao.ProductRepository;
-import org.example.swordsnstuffapi.dao.UserRepository;
-import org.example.swordsnstuffapi.models.Category;
-import org.example.swordsnstuffapi.models.CustomUser;
-import org.example.swordsnstuffapi.models.Order;
-import org.example.swordsnstuffapi.models.Product;
+import org.example.swordsnstuffapi.dao.*;
+import org.example.swordsnstuffapi.models.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.core.parameters.P;
@@ -27,13 +21,15 @@ public class Seeder {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private OrderRepository orderRepository;
+    private CouponRepository couponRepository;
 
-    public Seeder(CategoryRepository categoryRepository, ProductRepository productRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, OrderRepository orderRepository) {
+    public Seeder(CategoryRepository categoryRepository, ProductRepository productRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, OrderRepository orderRepository, CouponRepository couponRepository) {
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.orderRepository = orderRepository;
+        this.couponRepository = couponRepository;
     }
 
     @EventListener
@@ -49,7 +45,16 @@ public class Seeder {
 
         );
 
+
+        CustomUser admin = new CustomUser(
+                "admin@admin.com",
+                passwordEncoder.encode("Admin123!"),
+                "Admin",
+                "Bob"
+        );
+
         this.userRepository.save(customer);
+        this.userRepository.save(admin);
 // Definieer luxe categorieën
         Category categoryLuxuryWatches = new Category("Luxury Watches");
         Category categoryDesignerHandbags = new Category("Designer Handbags");
@@ -81,7 +86,10 @@ public class Seeder {
 // Sla de order op
         this.orderRepository.save(luxuryOrder);
 
+        Coupon coupon = new Coupon(1, null, null, 1, 20, null, null, null, true
+        );
 
+        this.couponRepository.save(coupon);
     }
 
     private void seedUser(){

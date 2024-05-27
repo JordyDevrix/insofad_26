@@ -39,6 +39,7 @@ public class SecurityConfig {
                     .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/account/").permitAll()
                     .requestMatchers("/products/**").permitAll()
+                        .requestMatchers("/admin/**").permitAll()
                     .requestMatchers("/error").anonymous()
                     .anyRequest().authenticated()
                 )

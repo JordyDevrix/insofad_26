@@ -27,6 +27,7 @@ export class OrderHistoryComponent implements OnInit{
     this.authService.getCurrentUser()
     .subscribe((customer: Customer) => {
       this.customer = customer;
+      console.log("Current user:" + customer)
     });
   }
 }

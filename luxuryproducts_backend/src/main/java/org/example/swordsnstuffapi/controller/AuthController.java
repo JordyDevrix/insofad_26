@@ -5,6 +5,7 @@ import org.example.swordsnstuffapi.config.JWTUtil;
 import org.example.swordsnstuffapi.dao.UserRepository;
 import org.example.swordsnstuffapi.dto.AuthenticationDTO;
 import org.example.swordsnstuffapi.dto.LoginResponse;
+import org.example.swordsnstuffapi.dto.UserDTO;
 import org.example.swordsnstuffapi.models.CustomUser;
 import org.example.swordsnstuffapi.services.CredentialValidator;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -77,6 +81,7 @@ public class AuthController {
             String token = jwtUtil.generateToken(body.email);
 
             CustomUser customUser = userDAO.findByEmail(body.email);
+
             LoginResponse loginResponse = new LoginResponse(customUser.getEmail(), token);
 
 
@@ -86,7 +91,13 @@ public class AuthController {
             throw new ResponseStatusException(
                     HttpStatus.FORBIDDEN, "No valid credentials"
             );
-        }
-    }
+        }}
+
+//        @GetMapping("/currentUser")
+//        public ResponseEntity<UserDTO> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
+//            // Assuming you have a service to fetch user details from the database
+//            UserDTO userDTO = new UserDTO(userDAO.findByEmail());
+//            return ResponseEntity.ok(userDTO);
+//        }
 
 }
