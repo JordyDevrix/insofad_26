@@ -4,15 +4,16 @@
         <h4 style="margin: 1.5rem">Coupons</h4>
         <hr>
         <!-- <div class="innerContainer" *ngIf="coupons && coupons.length > 0"> -->
-            <div style="display: flex; flex-wrap: wrap;" *ngIf="coupons && coupons.length">
+            <div class="filter form-group col-md-3" style="display: flex; flex-wrap: wrap;" *ngIf="coupons && coupons.length">
             <div *ngFor="let coupon of coupons">
                 <h3>Title: {{ coupon.title }}</h3>
                 <p>Description: {{ coupon.message }}</p>
                 <p>Running time: {{coupon.startDate}}{{coupon.endDate}}</p>
                 <p>Discount: {{coupon.price}}{{ coupon.type }}</p>
+                <br/>
             </div>
         </div>
-            <div class="innerContainer" *ngIf="!coupons || coupons.length === 0">
+            <div class="filter form-group col-md-3" *ngIf="!coupons || coupons.length === 0">
                 <p>No coupons available.</p>
             </div>
         </div>

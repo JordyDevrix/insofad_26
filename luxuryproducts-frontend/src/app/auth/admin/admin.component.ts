@@ -33,19 +33,33 @@ export class AdminComponent implements OnInit {
   } 
 
   onSubmit(){
-    
-  }
+    if (this.couponForm.valid) {
+      const formValues = this.couponForm.value;
+      const newCoupon: Coupon = {
+        title: formValues.title,
+        message: formValues.message,
+        amount: formValues.amount,
+        price: formValues.price,
+        startDate: new Date(formValues.startDate),
+        endDate: new Date(formValues.endDate),
+        type: formValues.type,
+        status: formValues.status
+      };
 
-  createNewCoupon(coupon: Coupon): void {
-    this.couponService.createCoupon(coupon).subscribe(
-      response => {
-        console.log(response.message); // Log or display the message
-      },
-      error => {
-        console.error('Could not create coupon.', error);
-      }
-    )
-}
+      this.couponService.createCoupon(newCoupon).subscribe(
+        response => {
+          console.log(response.message);
+          // Handle successful creation, e.g., display a success message or reset the form
+        },
+        error => {
+          console.error('Could not create coupon.', error);
+          // Handle error, e.g., display an error message
+        }
+      );
+    } else {
+      console.error('Form is invalid');
+    }
+  }
 }
 //   resetForm() {
 //     this.coupon = {

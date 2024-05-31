@@ -6,7 +6,7 @@
 
   <div>
     <h2>Create Coupon</h2>
-    <form [formGroup]="couponForm" onsubmit="createNewCoupon()">
+    <form [formGroup]="couponForm" (ngSubmit)="onSubmit()">
       <div>
         <label for="title">Title:</label>
         <input type="text" id="title" formControlName="title" required>
