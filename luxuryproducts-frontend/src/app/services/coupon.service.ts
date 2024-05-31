@@ -10,29 +10,33 @@ export class CouponService {
 
   constructor(private httpClient : HttpClient) { }  
 
-  private coupon : Coupon;
-  private mainURL = 'http://localhost:8080/api';
+  // private coupon : Coupon;
+  private mainURL = 'http://localhost:8080/api/coupons';
 
   public getAllCoupons():Observable<Coupon[]>{
     return this.httpClient.get<Coupon[]>(`${this.mainURL}/getAllCoupons`)
   }
 
-  public createCoupon(coupon: Coupon): Observable<Coupon>{
-    return this.httpClient.post<Coupon>(`${this.mainURL}/createCoupon`, coupon);
+  public createCoupon(coupon: Coupon): Observable<{message:string}>{
+    return this.httpClient.post<{message: string}>(`${this.mainURL}/createCoupon`, coupon,{
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 
   public getAllCouponsPercentage(){
     const type: String = "percentage";
-    return this.httpClient.get<Coupon[]>(`http://localhost:8080/api/getAllCouponsWhereTypeIs`+ type, {withCredentials:true})
+    return this.httpClient.get<Coupon[]>(`http://localhost:8080/api/getAllCouponsWhereTypeIs`+ type)
   }
 
   public getAllCouponsFlatAmount(){
     const type: String = "flatAmount";
-    return this.httpClient.get<Coupon[]>(`http://localhost:8080/api/getAllCouponsWhereTypeIs`+ type, {withCredentials:true})
+    return this.httpClient.get<Coupon[]>(`http://localhost:8080/api/getAllCouponsWhereTypeIs`+ type)
   }
 
-  public submitCoupon(){
-
+  public getCouponPrice(){
+    
   }
 
 }

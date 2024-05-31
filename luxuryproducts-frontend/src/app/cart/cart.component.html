@@ -74,6 +74,9 @@
       @if (cartProducts.length) {
         <p>Total price:</p> 
         <p>{{ totalPrice | currency }}</p>
+      } @else {
+          <p>Total price:</p> 
+          <p>{{ totalPrice | currency }}</p>
       }
     </div>
 

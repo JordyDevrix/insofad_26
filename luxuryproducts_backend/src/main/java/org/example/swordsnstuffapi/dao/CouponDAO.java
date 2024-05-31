@@ -14,19 +14,34 @@ public class CouponDAO {
 
     public CouponDAO(CouponRepository couponRepository) {this.couponRepository = couponRepository;}
 
-    public List<Coupon> getAllCoupons() {return this.couponRepository.findAll();}
-
     public void createCoupon(CouponDTO couponDTO){
-        Coupon coupon = new Coupon(
-            couponDTO.id,
-                couponDTO.title,
-            couponDTO.message,
-            couponDTO.amount,
-            couponDTO.price,
-            couponDTO.startDate,
-            couponDTO.endDate,
-            couponDTO.type,
-            couponDTO.status
-        );
-        couponRepository.save(coupon);
-    }}
+        Coupon coupon = new Coupon();
+            coupon.setTitle(couponDTO.getTitle());
+            coupon.setMessage(couponDTO.getMessage());
+            coupon.setAmount(couponDTO.getAmount());
+            coupon.setPrice(couponDTO.getPrice());
+            coupon.setStartDate(couponDTO.getStartDate());
+            coupon.setEndDate(couponDTO.getEndDate());
+            coupon.setType(couponDTO.getType());
+            coupon.setStatus(couponDTO.isStatus());
+            couponRepository.save(coupon);
+        }
+
+    public List<Coupon> getAllCoupons() {
+        return couponRepository.findAll();}
+
+//        public void createCoupon(CouponDTO couponDTO){
+//            Coupon coupon = new Coupon(
+//                    couponDTO.id,
+//                    couponDTO.title,
+//                    couponDTO.message,
+//                    couponDTO.amount,
+//                    couponDTO.price,
+//                    couponDTO.startDate,
+//                    couponDTO.endDate,
+//                    couponDTO.type,
+//                    couponDTO.status
+//            );
+
+
+    }

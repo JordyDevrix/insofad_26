@@ -20,6 +20,7 @@ export class CartComponent implements OnInit {
   productsPrice: number;
   totalPrice: number;
   shippingCosts: number = 99.95;
+  couponCosts: number;
   userIsLoggedIn: boolean;
   order: Order = {
   "products": [], 
@@ -46,7 +47,7 @@ export class CartComponent implements OnInit {
 
   getTotalPrice() {
     this.productsPrice = this.cartProducts.reduce((acc, curr) => acc + curr.price, 0)
-    this.totalPrice = this.productsPrice + this.shippingCosts;
+    this.totalPrice = this.productsPrice + this.shippingCosts + this.couponCosts;
   }
 
   onPlaceOrder() {

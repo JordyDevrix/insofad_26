@@ -8,7 +8,7 @@ import { NgFor, NgIf } from '@angular/common';
   standalone: true,
   imports: [NgIf, NgFor],
   templateUrl: './coupons.component.html',
-  styleUrl: './coupons.component.scss'
+  styleUrls: ['./coupons.component.scss']
 })
 
 export class CouponsComponent implements OnInit{
@@ -28,4 +28,5 @@ export class CouponsComponent implements OnInit{
     )
   }
 
+    
 }

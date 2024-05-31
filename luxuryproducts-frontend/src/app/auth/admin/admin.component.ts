@@ -4,6 +4,7 @@ import { Coupon } from '../../models/coupon.model';
 import { CouponType } from '../../models/coupontype.model';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, NgIf } from '@angular/common';
+import { CouponsComponent } from '../../coupons/coupons.component';
 
 @Component({
   selector: 'app-admin',
@@ -29,24 +30,22 @@ export class AdminComponent implements OnInit {
       type: ['', Validators.required],
       status: ['', Validators.required]
     });
+  } 
+
+  onSubmit(){
+    
   }
 
-  onSubmit(): void {
-    if (this.couponForm.valid) {
-      const coupon: Coupon = this.couponForm.value;
-      this.couponService.createCoupon(coupon).subscribe(
-        (response: Coupon) => {
-          console.log('Coupon created successfully', response);
-          this.couponForm.reset();
-        },
-        error => {
-          console.error('Error creating coupon', error);
-        }
-      );
-    } else {
-      console.error('Form is invalid');
-    }
-  }
+  createNewCoupon(coupon: Coupon): void {
+    this.couponService.createCoupon(coupon).subscribe(
+      response => {
+        console.log(response.message); // Log or display the message
+      },
+      error => {
+        console.error('Could not create coupon.', error);
+      }
+    )
+}
 }
 //   resetForm() {
 //     this.coupon = {
