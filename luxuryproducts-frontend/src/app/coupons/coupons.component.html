@@ -8,8 +8,8 @@
             <div *ngFor="let coupon of coupons">
                 <h3>Title: {{ coupon.title }}</h3>
                 <p>Description: {{ coupon.message }}</p>
-                <p>Running time: {{coupon.startDate}}{{coupon.endDate}}</p>
-                <p>Discount: {{coupon.price}}{{ coupon.type }}</p>
+                <p>Running time: {{coupon.startDate}} - {{coupon.endDate}}</p>
+                <p>Discount: {{ coupon.type }}{{coupon.price}}</p>
                 <br/>
             </div>
         </div>

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Coupon } from '../models/coupon.model';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
+import { AdminComponent } from '../auth/admin/admin.component';
+import { CartComponent } from '../cart/cart.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,11 @@ export class CouponService {
 
   constructor(private httpClient : HttpClient) { }  
 
-  // private coupon : Coupon;
+  private coupon : Coupon;
+  totalPrice : number;
+  newTotal : number;
+  message : string;
+
   private mainURL = 'http://localhost:8080/api/coupons';
 
   public getAllCoupons():Observable<Coupon[]>{
@@ -35,8 +41,13 @@ export class CouponService {
     return this.httpClient.get<Coupon[]>(`http://localhost:8080/api/getAllCouponsWhereTypeIs`+ type)
   }
 
-  public getCouponPrice(){
-    
+  public applyCoupon(title:string, couponPrice: number): Observable<{newTotal : number, message: string}>{
+    couponPrice = this.coupon.price;
+    return this.httpClient.post<{ newTotal: number, message: string }>(`${this.mainURL}/applyCoupon`, { title, couponPrice },
+      {
+        headers: {
+          'Content-Type': 'application/json'
+      }
+    })   
   }
-
 }

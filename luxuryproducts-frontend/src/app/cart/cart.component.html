@@ -60,23 +60,23 @@
 
     <div class="overviewItem">
       <p>Korting:</p> 
-      <p>{{ shippingCosts | currency }}</p>
+      <p>{{ couponCosts | currency }}</p>
     </div>
 
     <div class="coupon-container">
       <h4>Enter Your Coupon Code</h4>
-      <input type="text" class="coupon-input" id="couponCode" placeholder="Enter coupon code">
-      <button class="submit-button" onclick="submitCoupon()">Submit</button>
+      <input type="text" class="coupon-input" id="couponCode" placeholder="Enter coupon code" #couponInput>
+      <button class="submit-button" (click)="applyCoupon(couponInput.value)">Submit</button>
           </div>
 
     <hr style="margin: 0.5rem 0;">
     <div class="overviewItem">
       @if (cartProducts.length) {
         <p>Total price:</p> 
-        <p>{{ totalPrice | currency }}</p>
+        <p>{{ getTotalPrice() | currency }}</p>
       } @else {
           <p>Total price:</p> 
-          <p>{{ totalPrice | currency }}</p>
+          <p>{{ getTotalPrice() | currency }}</p>
       }
     </div>
 

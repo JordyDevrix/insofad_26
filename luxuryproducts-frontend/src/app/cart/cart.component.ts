@@ -7,6 +7,7 @@ import { OrderService } from '../services/order.service';
 import { AuthService } from '../auth/auth.service';
 import { Order } from '../models/order.model';
 import { CouponService } from '../services/coupon.service';
+import { Coupon } from '../models/coupon.model';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +18,9 @@ import { CouponService } from '../services/coupon.service';
 })
 export class CartComponent implements OnInit {
   public cartProducts: Product[];
-  productsPrice: number;
+  private coupon : Coupon;
+
+  productsPrice: number;  
   totalPrice: number;
   shippingCosts: number = 99.95;
   couponCosts: number;
@@ -45,9 +48,11 @@ export class CartComponent implements OnInit {
     this.cartService.removeProductFromCart(product_index);
   }
 
-  getTotalPrice() {
-    this.productsPrice = this.cartProducts.reduce((acc, curr) => acc + curr.price, 0)
-    this.totalPrice = this.productsPrice + this.shippingCosts + this.couponCosts;
+  public getTotalPrice() {
+    // this.couponCosts = this.coupon.price;
+    this.productsPrice = this.cartProducts.reduce((acc, curr) => acc + curr.price, 0);
+    console.log(this.totalPrice);
+    return this.totalPrice = this.productsPrice + this.shippingCosts - this.couponCosts;
   }
 
   onPlaceOrder() {
@@ -60,7 +65,6 @@ export class CartComponent implements OnInit {
     } else {
       alert("Please add items to your cart before placing an order.")
     }
-
   }
 
   public checkLoginState() {
@@ -70,4 +74,23 @@ export class CartComponent implements OnInit {
       this.userIsLoggedIn = loginState;
     });
   }
+
+  newTotal: number;
+  message: string;
+
+  public applyCoupon(couponTitle: string) {
+    this.couponService.applyCoupon(couponTitle, this.totalPrice).subscribe(
+      (response) => {
+        this.newTotal = response.newTotal;
+        this.message = response.message;
+        console.log('Coupon applied successfully:', response);
+        console.log(this.totalPrice)
+      },
+      (error) => {
+        console.error('Error applying coupon:', error);
+      }
+    );
+  }
+
 }
+
