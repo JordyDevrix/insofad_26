@@ -1,0 +1,7 @@
+{
+  "timestamp": "2024-05-30T15:28:47.786+00:00",
+  "status": 400,
+  "error": "Bad Request",
+  "message": "Required request body is missing: public org.springframework.http.ResponseEntity<java.lang.String> org.example.swordsnstuffapi.controller.ProductController.createProduct(org.example.swordsnstuffapi.dto.ProductDTO)",
+  "path": "/api/products"
+}
