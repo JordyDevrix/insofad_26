@@ -23,7 +23,7 @@ export class CartComponent implements OnInit {
   productsPrice: number;  
   totalPrice: number;
   shippingCosts: number = 99.95;
-  couponCosts: number;
+  
   userIsLoggedIn: boolean;
   order: Order = {
   "products": [], 
@@ -48,11 +48,23 @@ export class CartComponent implements OnInit {
     this.cartService.removeProductFromCart(product_index);
   }
 
+  // public getTotalPrice() {
+  //   // this.couponCosts = this.coupon.price;
+  //   this.productsPrice = this.cartProducts.reduce((acc, curr) => acc + curr.price, 0);
+  //   return this.totalPrice = this.productsPrice + this.shippingCosts - this.couponCosts;
+  // }
+
   public getTotalPrice() {
-    // this.couponCosts = this.coupon.price;
+    this.couponCosts = this.coupon ? this.coupon.price : 0;
     this.productsPrice = this.cartProducts.reduce((acc, curr) => acc + curr.price, 0);
-    console.log(this.totalPrice);
-    return this.totalPrice = this.productsPrice + this.shippingCosts - this.couponCosts;
+    this.totalPrice = this.productsPrice + this.shippingCosts - this.couponCosts;
+  
+    if (isNaN(this.totalPrice)) {
+      console.error("Total price calculation resulted in NaN");
+      return 0;
+    }
+  
+    return this.totalPrice;
   }
 
   onPlaceOrder() {
@@ -77,18 +89,26 @@ export class CartComponent implements OnInit {
 
   newTotal: number;
   message: string;
+  couponCosts : number = 0;
 
   public applyCoupon(couponTitle: string) {
-    this.couponService.applyCoupon(couponTitle, this.totalPrice).subscribe(
-      (response) => {
-        this.newTotal = response.newTotal;
-        this.message = response.message;
-        console.log('Coupon applied successfully:', response);
-        console.log(this.totalPrice)
-      },
-      (error) => {
-        console.error('Error applying coupon:', error);
-      }
+    const totalPrice = this.getTotalPrice();
+    this.couponService.applyCoupon(couponTitle, totalPrice).subscribe(
+        (response) => {
+            if (response && response.newTotal !== undefined && response.discount !== undefined) {
+                this.newTotal = response.newTotal;
+                this.couponCosts = response.discount;
+                this.message = response.message;
+                console.log('Coupon applied successfully:', response);
+                console.log('Discount amount: ' + this.couponCosts);
+                console.log('New total price after applying coupon:', this.newTotal);
+            } else {
+                console.error('Coupon response does not contain expected data:', response);
+            }
+        },
+        (error) => {
+            console.error('Error applying coupon:', error);
+        }
     );
   }
 

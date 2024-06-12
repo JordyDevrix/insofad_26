@@ -71,9 +71,9 @@
 
     <hr style="margin: 0.5rem 0;">
     <div class="overviewItem">
-      @if (cartProducts.length) {
+      @if (cartProducts.length && couponCosts != 0) {
         <p>Total price:</p> 
-        <p>{{ getTotalPrice() | currency }}</p>
+        <p>{{ newTotal| currency }}</p>
       } @else {
           <p>Total price:</p> 
           <p>{{ getTotalPrice() | currency }}</p>

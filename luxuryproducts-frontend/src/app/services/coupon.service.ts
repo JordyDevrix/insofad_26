@@ -41,13 +41,25 @@ export class CouponService {
     return this.httpClient.get<Coupon[]>(`http://localhost:8080/api/getAllCouponsWhereTypeIs`+ type)
   }
 
-  public applyCoupon(title:string, couponPrice: number): Observable<{newTotal : number, message: string}>{
-    couponPrice = this.coupon.price;
-    return this.httpClient.post<{ newTotal: number, message: string }>(`${this.mainURL}/applyCoupon`, { title, couponPrice },
+  // public applyCoupon(title:string): Observable<{newTotal : number, coupon?: {price: number}, message: string}>{
+  //   return this.httpClient.post<{ newTotal: number, coupon?: {price: number}, message: string }>(`${this.mainURL}/applyCoupon`, { title },
+  //     {
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //     }
+  //   })   
+  // }
+
+  public applyCoupon(title: string, totalPrice: number): Observable<{ newTotal: number, discount: number, message: string }> {
+    return this.httpClient.post<{ newTotal: number, discount: number, message: string }>(`${this.mainURL}/applyCoupon`, 
+      { 
+        title: title, 
+        totalPrice: totalPrice 
+      },
       {
         headers: {
           'Content-Type': 'application/json'
+        }
       }
-    })   
-  }
-}
+    );
+}}
