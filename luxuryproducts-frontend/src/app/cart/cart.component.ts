@@ -48,12 +48,6 @@ export class CartComponent implements OnInit {
     this.cartService.removeProductFromCart(product_index);
   }
 
-  // public getTotalPrice() {
-  //   // this.couponCosts = this.coupon.price;
-  //   this.productsPrice = this.cartProducts.reduce((acc, curr) => acc + curr.price, 0);
-  //   return this.totalPrice = this.productsPrice + this.shippingCosts - this.couponCosts;
-  // }
-
   public getTotalPrice() {
     this.couponCosts = this.coupon ? this.coupon.price : 0;
     this.productsPrice = this.cartProducts.reduce((acc, curr) => acc + curr.price, 0);

@@ -1,7 +1,0 @@
-{
-  "timestamp": "2024-05-30T15:28:47.964+00:00",
-  "status": 401,
-  "error": "Unauthorized",
-  "message": "Unauthorized",
-  "path": "/api/coupons/getAllCoupons"
-}
