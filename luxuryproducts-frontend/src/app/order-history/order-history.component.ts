@@ -22,12 +22,12 @@ export class OrderHistoryComponent implements OnInit{
     this.orderService
     .getOrders()
     .subscribe((orders: Order[]) => {
-        this.orderList = orders;
+      this.orderList = orders;
+      console.log("Current user:" + this.customer?.firstName)
     });
     this.authService.getCurrentUser()
     .subscribe((customer: Customer) => {
       this.customer = customer;
-      console.log("Current user:" + customer)
     });
   }
 }

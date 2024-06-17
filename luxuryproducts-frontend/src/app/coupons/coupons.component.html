@@ -6,11 +6,13 @@
         <!-- <div class="innerContainer" *ngIf="coupons && coupons.length > 0"> -->
             <div class="filter form-group col-md-3" style="display: flex; flex-wrap: wrap;" *ngIf="coupons && coupons.length">
             <div *ngFor="let coupon of coupons">
+                <div *ngIf="coupon.status">
                 <h3>Title: {{ coupon.title }}</h3>
                 <p>Description: {{ coupon.message }}</p>
                 <p>Running time: {{coupon.startDate}} - {{coupon.endDate}}</p>
                 <p>Discount: {{ coupon.type }}{{coupon.price}}</p>
                 <br/>
+            </div>
             </div>
         </div>
             <div class="filter form-group col-md-3" *ngIf="!coupons || coupons.length === 0">

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Coupon } from '../models/coupon.model';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { AdminComponent } from '../auth/admin/admin.component';
 import { CartComponent } from '../cart/cart.component';
@@ -41,15 +41,6 @@ export class CouponService {
     return this.httpClient.get<Coupon[]>(`http://localhost:8080/api/getAllCouponsWhereTypeIs`+ type)
   }
 
-  // public applyCoupon(title:string): Observable<{newTotal : number, coupon?: {price: number}, message: string}>{
-  //   return this.httpClient.post<{ newTotal: number, coupon?: {price: number}, message: string }>(`${this.mainURL}/applyCoupon`, { title },
-  //     {
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //     }
-  //   })   
-  // }
-
   public applyCoupon(title: string, totalPrice: number): Observable<{ newTotal: number, discount: number, message: string }> {
     return this.httpClient.post<{ newTotal: number, discount: number, message: string }>(`${this.mainURL}/applyCoupon`, 
       { 
@@ -62,4 +53,30 @@ export class CouponService {
         }
       }
     );
-}}
+
+}
+
+getCouponByTitle(title: string): Observable<any> {
+  return this.httpClient.get<any>(`${this.mainURL}/getByTitle/${title}`);
+}
+
+// getCouponByTitle(title: string): Observable<any> {
+//   return this.httpClient.get<any>(`${this.mainURL}/${title}`);
+// }
+
+updateCoupon(title: string, status: boolean): Observable<any> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json'
+  });
+
+  return this.httpClient.put<any>(
+    `${this.mainURL}/updateCoupon/${title}`,
+    { status },
+    { headers }
+  );
+}
+
+deleteCoupon(title: string): Observable<any> {
+  return this.httpClient.delete<any>(`${this.mainURL}/${title}`);
+}
+}
