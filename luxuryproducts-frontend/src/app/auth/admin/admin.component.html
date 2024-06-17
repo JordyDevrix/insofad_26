@@ -91,10 +91,10 @@
           <div *ngIf="activeSection === 'delete'" (click)="stopPropagation($event)">
             <form [formGroup]="titleForm" (ngSubmit)="deleteCoupon()">
               <div>
-                <label for="deleteTitle" formControlName="title">Title:</label>
-                <input type="text" id="deleteTitle" formControlName="deleteTitle">
+                <label for="deleteTitle">Title:</label>
+                <input type="text" id="deleteTitle" formControlName="deleteTitle" required>
               </div>
-              <button type="button" class="btn btn-danger" (click)="deleteCoupon()">Delete Coupon</button>
+              <button type="submit" class="btn btn-danger">Delete Coupon</button>
             </form>
           </div>
         </div>

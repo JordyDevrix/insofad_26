@@ -111,10 +111,10 @@ export class AdminComponent implements OnInit {
       this.couponService.getCouponByTitle(title).pipe(
         switchMap(coupon => {
           if (coupon) {
-            const couponId = coupon.id; // Assuming the coupon object has an id property
+            const couponTitle = coupon.title;
             const confirmation = window.confirm('Are you sure you want to delete this coupon?');
             if (confirmation) {
-              return this.couponService.deleteCoupon(couponId).pipe(
+              return this.couponService.deleteCoupon(couponTitle).pipe(
                 map(() => ({ success: true, message: 'Coupon deleted successfully' })),
                 catchError(err => of({ success: false, message: 'Failed to delete coupon' }))
               );
