@@ -1,0 +1,42 @@
+<app-nav></app-nav>
+<div>
+    <h2>You currently have {{ products.length }} products which of {{ sellableProducts.length }} sellable</h2>
+    <h5>total stock: {{ totalStock }} products</h5>
+</div>
+<div>
+    <h3>Remove product</h3>
+    <ul>
+        @for (product of products; track $index) {
+            <div class="product">
+                <img src="{{ product.imagePath }}" alt="{{ product.name }}" style="width: 100px; object-fit: contain;">
+                <div>
+                    <h5 style="margin: 1px">{{ product.brand }} {{ product.name }}</h5>
+                    <div class="productvariants">
+                        <h6>Variants</h6>
+                        @if (product.productProperties.length == 0) {
+                            <p style="color: brown">No variants</p>
+                        } @else {
+                            <ul class="variantlist">
+                                @for (property of product.productProperties; track $index) {
+                                    <li class="variant">
+                                        <div style="margin: 1px">
+                                            <p style="margin: 1px">
+                                                Size <strong>{{ property.size }}</strong><br>
+                                                Material <strong>{{ property.material }}</strong><br>
+                                                Color <strong>{{ property.color }}</strong><br>
+                                                Stock <strong>{{ property.stock }}</strong>
+                                            </p>
+                                            <p style="margin: 1px">{{ property.price | currency }}</p>
+                                            <button (click)="addStock(product, property)" id="addOne">Buy 1x stock</button>
+                                            <button (click)="addStockAmount(product, property)">Buy 10x stock</button>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </ul>
+</div>
