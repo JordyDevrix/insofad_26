@@ -1,2 +1,18 @@
 <app-nav></app-nav>
-<p>changecoupon works!</p>
+<div class="coupon-actions">
+    <div class="coupon-block" (click)="toggleSection('change')" [class.active]="activeSection === 'change'">
+        <h3>Change a Coupon</h3>
+            <div *ngIf="activeSection === 'change'" (click)="stopPropagation($event)">
+                <form [formGroup]="titleForm" (ngSubmit)="updateCoupon()">
+            <div>
+                <label for="changeTitle">Title:</label>
+                <input type="text" id="changeTitle" formControlName="changeTitle" required>
+            </div>
+
+        <button type="submit" class="btn btn-primary">Update Coupon</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+ 

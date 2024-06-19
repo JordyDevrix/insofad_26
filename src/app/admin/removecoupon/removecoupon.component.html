@@ -1,2 +1,15 @@
 <app-nav></app-nav>
-<p>removecoupon works!</p>
+<div class="coupon-actions">
+    <div class="coupon-block" (click)="toggleSection('delete')" [class.active]="activeSection === 'delete'">
+        <h3>Delete a Coupon</h3>
+        <div *ngIf="activeSection === 'delete'" (click)="stopPropagation($event)">
+        <form [formGroup]="titleForm" (ngSubmit)="deleteCoupon()">
+        <div>
+          <label for="deleteTitle">Title:</label>
+          <input type="text" id="deleteTitle" formControlName="deleteTitle" required>
+        </div>
+        <button type="submit" class="btn btn-danger">Delete Coupon</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -65,67 +65,6 @@ export class AddcouponComponent implements OnInit{
       }
     }
   
-    updateCoupon(): void {
-      const title = this.titleForm.get('changeTitle')?.value;
-  
-      if (title) {
-        this.couponService.getCouponByTitle(title).pipe(
-          switchMap(coupon => {
-            if (coupon) {
-              const updatedStatus = !coupon.status;
-              console.log(`Updating coupon with title ${title} to status ${updatedStatus}`);
-              return this.couponService.updateCoupon(title, updatedStatus).pipe(
-                map(() => ({ success: true, message: `Coupon status changed to ${updatedStatus}` })),
-                catchError(err => {
-                  console.error('Error updating coupon status:', err);
-                  return  of({ success: false, message: 'Failed to update coupon status' })})
-              );
-            } else {
-              return of({ success: false, message: 'Coupon not found' });
-            }
-        
-          })
-        ).subscribe(response => {
-          if (response.success) {
-            alert(response.message);
-          } else {
-            alert(response.message);
-          }
-        });
-      }
-    }
-  
-    deleteCoupon() {
-      const title = this.titleForm.get('deleteTitle')?.value;
-  
-      if (title) {
-        this.couponService.getCouponByTitle(title).pipe(
-          switchMap(coupon => {
-            if (coupon) {
-              const couponTitle = coupon.title;
-              const confirmation = window.confirm('Are you sure you want to delete this coupon?');
-              if (confirmation) {
-                return this.couponService.deleteCoupon(couponTitle).pipe(
-                  map(() => ({ success: true, message: 'Coupon deleted successfully' })),
-                  catchError(err => of({ success: false, message: 'Failed to delete coupon' }))
-                );
-              } else {
-                return of({ success: false, message: 'Coupon deletion cancelled' });
-              }
-            } else {
-              return of({ success: false, message: 'Coupon not found' });
-            }
-          })
-        ).subscribe(response => {
-          if (response.success) {
-            alert(response.message);
-          } else {
-            alert(response.message);
-          }
-        });
-      }
-    }
-  
     stopPropagation(event: Event) {
       event.stopPropagation();
     }
