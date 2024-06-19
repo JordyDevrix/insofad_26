@@ -1,0 +1,23 @@
+img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+}
+
+#name {
+    padding-left: 20px;
+    border-left: 2px solid black;
+}
+
+#customerInfo h5 {
+    margin: 0;
+}
+
+
+
+#details {
+    margin-left: 2em;
+    p {
+        margin: 0;
+    }
+}

@@ -1,0 +1,35 @@
+<div class="justify-content-center" style="margin-bottom: 3em;">
+    <h2>{{ product.name }}</h2>
+    <div class="col-md-2 col-lg-2 col-xl-2 imager">
+        <img src="{{ product.imagePath }}"
+             class="" alt="{{ product.name }}" height="350px">
+    </div>
+    <hr>
+    <div class="d-flex align-items-center">
+        <h3 class="p-2" style="margin: 0px;">{{ product.productProperties[0].price | currency }}</h3>
+    </div>
+    <h4>Models</h4>
+    <ul>
+        @for (property of product.productProperties; track $index) {
+            <li style="margin: 1px;">
+                <p style="margin: 1px;">
+                    Color: {{ property.color }} -
+                    Size: {{ property.size }} -
+                    Material {{ property.material }} -
+                    <strong>Price: {{ property.price | currency }}</strong>
+                </p>
+                <button (click)="buyProduct(product, $index)" class="btn btn-primary p-2" id="{{ $index }}"
+                        style="margin-left: 1em; border-radius: 1000px;" [ngStyle]="{'color': clickedStyle}"
+                        *ngIf="userIsLoggedIn">
+                    {{ text }}
+                    @if (showPlus) {
+                        <i class="fa-solid fa-plus"></i>
+                    }
+                </button>
+            </li>
+        }
+    </ul>
+    <p><strong>Beschrijving</strong></p>
+    <p>{{ product.description }}</p>
+    <p>Category: {{ product.category.name }}</p>
+</div>

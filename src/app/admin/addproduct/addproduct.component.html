@@ -1,0 +1,38 @@
+<app-nav></app-nav>
+<div class="admincontainer">
+    <h3>Add product</h3>
+    <form [formGroup]="addProduct" (ngSubmit)="onAddProduct()">
+        <div style="display: flex">
+            <input placeholder="name*" type="text" class="form-control" formControlName="name" id="name">
+            <input placeholder="brand (leave empty for no brand)" type="text" class="form-control" formControlName="brand" id="brand">
+        </div>
+        <input placeholder="description*" type="text" class="form-control" formControlName="description"
+               id="description">
+        <input placeholder="image path*" type="text" class="form-control" formControlName="imagePath" id="imagePath">
+        <select class="form-control" formControlName="category_id" id="category_id">
+            <option value="">Select category*</option>
+            @for (category of categories; track $index) {
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            }
+        </select>
+        <p>* = mandatory</p>
+        <button type="submit" class="btn btn-md btn-dark" [disabled]="!addProduct.valid">Add product</button>
+    </form>
+</div>
+<div class="admincontainer">
+    <h3>Add variant</h3>
+    <form [formGroup]="addVariant" (ngSubmit)="onAddVariant()">
+        <select class="form-control" formControlName="product_id" id="product_id">
+            <option value="">Select product*</option>
+            @for (product of products; track $index) {
+                <option value="{{ product.id }}">{{ product.brand }} {{ product.name }}</option>
+            }
+        </select>
+        <input placeholder="size*" type="text" class="form-control" formControlName="size" id="size">
+        <input placeholder="material*" type="text" class="form-control" formControlName="material" id="material">
+        <input placeholder="color*" type="text" class="form-control" formControlName="color" id="color">
+        <input placeholder="price*" type="text" class="form-control" formControlName="price" id="price">
+        <p>* = mandatory</p>
+        <button type="submit" id="addVar" class="btn btn-md btn-dark" [disabled]="!addVariant.valid">Add product</button>
+    </form>
+</div>
