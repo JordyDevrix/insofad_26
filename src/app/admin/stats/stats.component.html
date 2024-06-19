@@ -1,0 +1,29 @@
+<app-nav></app-nav>
+@if (orders.length === 0) {
+    <div style="justify-content: center; display: flex">
+        <h2>No orders found :/</h2>
+    </div>
+    <div style="justify-content: center; display: flex">
+        <img src="https://media2.giphy.com/media/NTsvNLsN04h2Jz1mhd/giphy-downsized.gif" alt="No orders found" style="width: 500px">
+    </div>
+} @else {
+    <h4>Total profit {{ totalProfit | currency }} - Total sales {{ orders.length }}</h4>
+    <p>Biggest order right now: {{ biggestOrder.id }} <sub>({{ biggestOrder.totalPrice | currency }})</sub> </p>
+    <hr>
+    <ul>
+        @for (order of orders; track $index) {
+            <li style="list-style: none">
+                <p>
+                    CUSTOMER DETAILS:
+                    <strong>{{ order.customer?.firstName }}
+                    {{ order.customer?.lastName }} </strong>|
+                    <strong>{{ order.customer?.email }} </strong> |
+                    <strong>{{ order.customer?.id }}</strong>
+                </p>
+                <p>ORDER ID: {{ order.id }} - <strong>{{ order.orderStatus }}</strong> </p>
+                <p>PAYMENT: {{ order.totalPrice | currency }}</p>
+            <hr>
+            </li>
+        }
+    </ul>
+}
