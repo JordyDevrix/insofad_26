@@ -1,0 +1,66 @@
+<app-nav></app-nav>
+<div class="coupon-actions">
+    <div class="coupon-block" (click)="toggleSection('create')" [class.active]="activeSection === 'create'">
+      <h3>Create a Coupon</h3>
+      <div *ngIf="activeSection === 'create'" (click)="stopPropagation($event)">
+        <form [formGroup]="couponForm" (ngSubmit)="onSubmit()">
+          <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" formControlName="title" required>
+            <div *ngIf="couponForm.get('title')?.invalid && (couponForm.get('title')?.dirty || couponForm.get('title')?.touched)">
+              <small>Title is required.</small>
+            </div>
+          </div>
+          <div>
+            <label for="message">Message:</label>
+            <input type="text" id="message" formControlName="message" required>
+            <div *ngIf="couponForm.get('message')?.invalid && (couponForm.get('message')?.dirty || couponForm.get('message')?.touched)">
+              <small>Message is required.</small>
+            </div>
+          </div>
+          <div>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" formControlName="amount" required>
+            <div *ngIf="couponForm.get('amount')?.invalid && (couponForm.get('amount')?.dirty || couponForm.get('amount')?.touched)">
+              <small>Amount must be at least 0.</small>
+            </div>
+          </div>
+          <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" formControlName="price" required>
+            <div *ngIf="couponForm.get('price')?.invalid && (couponForm.get('price')?.dirty || couponForm.get('price')?.touched)">
+              <small>Price must be at least 0.</small>
+            </div>
+          </div>
+          <div>
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" formControlName="startDate" required>
+            <div *ngIf="couponForm.get('startDate')?.invalid && (couponForm.get('startDate')?.dirty || couponForm.get('startDate')?.touched)">
+              <small>Start Date is required.</small>
+            </div>
+          </div>
+          <div>
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" formControlName="endDate" required>
+            <div *ngIf="couponForm.get('endDate')?.invalid && (couponForm.get('endDate')?.dirty || couponForm.get('endDate')?.touched)">
+              <small>End Date is required.</small>
+            </div>
+          </div>
+          <div>
+            <label for="type">Type:</label>
+            <input type="text" id="type" formControlName="type" required>
+            <div *ngIf="couponForm.get('type')?.invalid && (couponForm.get('type')?.dirty || couponForm.get('type')?.touched)">
+              <small>Type is required.</small>
+            </div>
+          </div>
+          <div>
+            <label for="status">Status:</label>
+            <input type="text" id="status" formControlName="status" required>
+            <div *ngIf="couponForm.get('status')?.invalid && (couponForm.get('status')?.dirty || couponForm.get('status')?.touched)">
+              <small>Status is required.</small>
+            </div>
+          </div>
+          <button type="submit" [disabled]="couponForm.invalid">Create Coupon</button>
+        </form>
+      </div>
+    </div>
