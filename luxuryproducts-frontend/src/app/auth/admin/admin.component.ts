@@ -62,11 +62,9 @@ export class AdminComponent implements OnInit {
       this.couponService.createCoupon(newCoupon).subscribe(
         response => {
           console.log(response.message);
-          // Handle successful creation, e.g., display a success message or reset the form
         },
         error => {
           console.error('Could not create coupon.', error);
-          // Handle error, e.g., display an error message
         }
       );
     } else {
@@ -128,7 +126,6 @@ export class AdminComponent implements OnInit {
       ).subscribe(response => {
         if (response.success) {
           alert(response.message);
-          // Optionally, refresh the list of coupons here
         } else {
           alert(response.message);
         }

@@ -14,8 +14,6 @@ export class AdminAuthGuard {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  // && this.authService.isAdmin()
-
   canActivate(): boolean {
     if (this.authService.$userIsLoggedIn) {
       return true;

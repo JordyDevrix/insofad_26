@@ -60,10 +60,6 @@ getCouponByTitle(title: string): Observable<any> {
   return this.httpClient.get<any>(`${this.mainURL}/getByTitle/${title}`);
 }
 
-// getCouponByTitle(title: string): Observable<any> {
-//   return this.httpClient.get<any>(`${this.mainURL}/${title}`);
-// }
-
 updateCoupon(title: string, status: boolean): Observable<any> {
   const headers = new HttpHeaders({
     'Content-Type': 'application/json'
