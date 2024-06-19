@@ -1,0 +1,37 @@
+{
+    "id": 1,
+    "name": "Oyster perpetual",
+    "imagePath": "https://schapi-products.s3.eu-central-1.amazonaws.com/3523842/m228238-0061_modelpage_front_facing_landscape.png",
+    "description": "Expensive ah collectors item",
+    "productProperties": [
+        {
+            "id": 1,
+            "size": "S",
+            "color": "Gold",
+            "material": "Gold",
+            "stock": 400,
+            "price": 40000
+        },
+        {
+            "id": 2,
+            "size": "M",
+            "color": "Gold",
+            "material": "Gold",
+            "stock": 400,
+            "price": 40001
+        },
+        {
+            "id": 3,
+            "size": "X",
+            "color": "Gold",
+            "material": "Gold",
+            "stock": 400,
+            "price": 40002
+        }
+    ],
+    "brand": "Rolex",
+    "category": {
+        "id": 1,
+        "name": "Watches"
+    }
+}

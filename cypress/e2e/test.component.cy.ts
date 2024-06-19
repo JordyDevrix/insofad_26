@@ -1,6 +1,12 @@
-describe('test een', () =>{
+// import window = Mocha.reporters.Base.window;
+
+describe('product page test', () =>{
     it('should visit productpage', function () {
+        cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'product.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products/1', {fixture: 'product1.json'})
+
         cy.visit("localhost:4200")
+        cy.wait(400)
         cy.contains('Products').click()
         cy.url().should("eq", "http://localhost:4200/products")
         cy.contains('Show detail').click()
@@ -9,16 +15,29 @@ describe('test een', () =>{
     })
 })
 
-describe('test twee', () =>{
+describe('product order test', () =>{
     it('should buy a product', function () {
+        cy.intercept("POST", 'http://localhost:8080/api/orders', {fixture: 'loginsucces.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'products.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products/1', {fixture: 'product1.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/account', {fixture: 'account.json'})
+        cy.intercept('POST', 'http://localhost:8080/api/account/login', {fixture: 'loginsucces.json'});
+        cy.fixture('loginsucces.json').then((loginsucces) => {
+            window.localStorage.setItem('token', loginsucces.token);
+        })
+
         cy.visit("localhost:4200")
+        cy.wait(400)
         cy.get('#dropdownMenu').click()
+        cy.wait(400)
         cy.contains('Login').click()
         cy.url().should("eq", "http://localhost:4200/account/login")
         cy.get('form').should('exist')
         cy.get('#email').type('bob@bobsluxuryenterprise.com')
         cy.get('#password1').type('Test123!')
         cy.get('#submit').click()
+        cy.wait(2000)
+
         cy.contains('Products').click()
         cy.url().should("eq", "http://localhost:4200/products")
         cy.contains('Show detail').click()
@@ -30,34 +49,44 @@ describe('test twee', () =>{
     })
 })
 
-describe('test drie', () =>{
+describe('addmin panel acces', () =>{
     it('should visit admin page', function () {
         cy.visit("localhost:4200")
+        cy.wait(400)
         cy.get('#dropdownMenu').click()
+        cy.wait(400)
         cy.contains('Login').click()
         cy.url().should("eq", "http://localhost:4200/account/login")
         cy.get('form').should('exist')
         cy.get('#email').type('bob@bobsluxuryenterprise.com')
         cy.get('#password1').type('Test123!')
         cy.get('#submit').click()
+        cy.wait(2000)
         cy.get('#dropdownMenu').click()
         cy.contains('Admin').click()
     })
 })
 
-describe('test vier', () =>{
+describe('adding a new product', () =>{
     it('should add a product', function () {
         cy.visit("localhost:4200")
+        cy.wait(400)
         cy.get('#dropdownMenu').click()
+        cy.wait(2000)
         cy.contains('Login').click()
+        cy.wait(2000)
         cy.url().should("eq", "http://localhost:4200/account/login")
         cy.get('form').should('exist')
         cy.get('#email').type('bob@bobsluxuryenterprise.com')
         cy.get('#password1').type('Test123!')
         cy.get('#submit').click()
+        cy.wait(2000)
         cy.get('#dropdownMenu').click()
+        cy.wait(400)
         cy.contains('Admin').click()
+        cy.wait(400)
         cy.contains('Add products').click()
+        cy.wait(400)
         cy.get('#name').type('test')
         cy.get('#description').type('test')
         cy.get('#imagePath').type('test')
@@ -66,76 +95,103 @@ describe('test vier', () =>{
     })
 })
 
-describe('test vijf', () =>{
+describe('removing a product', () =>{
     it('should remove a product', function () {
         cy.visit("localhost:4200")
+        cy.wait(400)
         cy.get('#dropdownMenu').click()
+        cy.wait(2000)
         cy.contains('Login').click()
+        cy.wait(2000)
         cy.url().should("eq", "http://localhost:4200/account/login")
         cy.get('form').should('exist')
         cy.get('#email').type('bob@bobsluxuryenterprise.com')
         cy.get('#password1').type('Test123!')
         cy.get('#submit').click()
+        cy.wait(2000)
         cy.get('#dropdownMenu').click()
+        cy.wait(400)
         cy.contains('Admin').click()
+        cy.wait(400)
         cy.contains('Remove products').click()
         cy.contains('Remove').click()
     })
 })
 
-describe('test zes', () =>{
+describe('removing a variant', () =>{
     it('should remove a variant', function () {
         cy.visit("localhost:4200")
+        cy.wait(400)
         cy.get('#dropdownMenu').click()
+        cy.wait(400)
         cy.contains('Login').click()
+        cy.wait(2000)
         cy.url().should("eq", "http://localhost:4200/account/login")
         cy.get('form').should('exist')
         cy.get('#email').type('bob@bobsluxuryenterprise.com')
         cy.get('#password1').type('Test123!')
         cy.get('#submit').click()
+        cy.wait(2000)
         cy.get('#dropdownMenu').click()
+        cy.wait(400)
         cy.contains('Admin').click()
+        cy.wait(400)
         cy.contains('Remove products').click()
         cy.contains('Remove variant').click()
     })
 })
 
-describe('test zeven', () =>{
+describe('Buy stock', () =>{
     it('should add variant stock', function () {
         cy.visit("localhost:4200")
+        cy.wait(400)
         cy.get('#dropdownMenu').click()
+        cy.wait(400)
         cy.contains('Login').click()
+        cy.wait(2000)
         cy.url().should("eq", "http://localhost:4200/account/login")
         cy.get('form').should('exist')
         cy.get('#email').type('bob@bobsluxuryenterprise.com')
         cy.get('#password1').type('Test123!')
         cy.get('#submit').click()
+        cy.wait(2000)
         cy.get('#dropdownMenu').click()
+        cy.wait(400)
         cy.contains('Admin').click()
+        cy.wait(400)
         cy.contains('Products stock').click()
+        cy.wait(400)
         cy.get('#addOne').click()
     })
 })
 
-describe('test acht', () =>{
+describe('adding a new variant', () =>{
     it('should add variant', function () {
         cy.visit("localhost:4200")
+        cy.wait(400)
         cy.get('#dropdownMenu').click()
+        cy.wait(400)
         cy.contains('Login').click()
+        cy.wait(2000)
         cy.url().should("eq", "http://localhost:4200/account/login")
         cy.get('form').should('exist')
         cy.get('#email').type('bob@bobsluxuryenterprise.com')
         cy.get('#password1').type('Test123!')
         cy.get('#submit').click()
+        cy.wait(2000)
         cy.get('#dropdownMenu').click()
+        cy.wait(400)
         cy.contains('Admin').click()
+        cy.wait(400)
         cy.contains('Add products').click()
+        cy.wait(400)
         cy.get('#product_id').select('1')
         cy.get('#size').type('test')
         cy.get('#material').type('test')
         cy.get('#color').type('test')
         cy.get('#price').type('1')
         cy.get('#addVar').click()
+        cy.wait(400)
     })
 })
 
