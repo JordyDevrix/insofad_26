@@ -57,13 +57,31 @@
       <p>Shipping costs:</p> 
       <p>{{ shippingCosts | currency }}</p>
     </div>
-    <hr style="margin: 0.5rem 0;">
     <div class="overviewItem">
-      @if (cartProducts.length) {
+      <p>Korting:</p> 
+      <p>{{ couponCosts | currency }}</p>
+    </div>
+    <hr style="margin: 0.5rem 0;">
+
+    <div class="coupon-container">
+      <h4>Enter Your Coupon Code</h4>
+      <input type="text" class="coupon-input" id="couponCode" placeholder="Enter coupon code" #couponInput>
+      <button class="submit-button" (click)="applyCoupon(couponInput.value)">Submit</button>
+      <div *ngIf="message" class="confirmation-message">
+        {{ message }}
+      </div>
+          </div>
+
+    <div class="overviewItem">
+      @if (cartProducts.length && couponCosts != 0) {
         <p>Total price:</p> 
-        <p>{{ totalPrice | currency }}</p>
+        <p>{{ newTotal| currency }}</p>
+      } @else {
+          <p>Total price:</p> 
+          <p>{{ getTotalPrice() | currency }}</p>
       }
     </div>
+
     <div style="text-align: center;">
       <button type="button" class="col-md-8" id="orderButton" 
       (click)="onPlaceOrder()">Place order</button>
