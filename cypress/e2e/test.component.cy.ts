@@ -16,15 +16,19 @@ describe('product page test', () =>{
 })
 
 describe('product order test', () =>{
+    beforeEach(function () {
+        cy.fixture('loginsucces.json').then((loginsucces) => {
+            localStorage.setItem('currentUser', loginsucces.email);
+            localStorage.setItem('token', loginsucces.token);
+        })
+    })
+
     it('should buy a product', function () {
         cy.intercept("POST", 'http://localhost:8080/api/orders', {fixture: 'loginsucces.json'})
         cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'products.json'})
         cy.intercept("GET", 'http://localhost:8080/api/products/1', {fixture: 'product1.json'})
         cy.intercept("GET", 'http://localhost:8080/api/account', {fixture: 'account.json'})
         cy.intercept('POST', 'http://localhost:8080/api/account/login', {fixture: 'loginsucces.json'});
-        cy.fixture('loginsucces.json').then((loginsucces) => {
-            window.localStorage.setItem('token', loginsucces.token);
-        })
 
         cy.visit("localhost:4200")
         cy.wait(400)
@@ -43,6 +47,7 @@ describe('product order test', () =>{
         cy.contains('Show detail').click()
         cy.get('ul').should('exist')
         cy.url().should("eq", "http://localhost:4200/products/1")
+        console.log(`The current user: ${localStorage.getItem('currentUser')}`)
         cy.get('#1').click()
         cy.contains('Cart').click()
         cy.get('#orderButton').click()
