@@ -23,6 +23,13 @@ export class OrderHistoryComponent implements OnInit {
     showReturnForm: boolean = false;
     public orderList: Order[];
     shippingCosts: number;
+    notificationVisible: boolean = false;
+ 
+    public showToaster(): void {
+      this.notificationVisible = true;
+      setTimeout(() => this.notificationVisible = false, 3000);
+    }
+  
 
     constructor(
         private orderService: OrderService,
@@ -49,7 +56,9 @@ export class OrderHistoryComponent implements OnInit {
 
     openReturnForm(order: Order) {
         this.selectedOrder = order;
+        console.log("selectedOrder" + this.selectedOrder)
         this.productDetails = this.selectedOrder.products.map(product => product.name).join(', ');
+
         this.reason = '';
         this.preferredHandling = 'refund';
         this.showReturnForm = true;
@@ -75,6 +84,8 @@ export class OrderHistoryComponent implements OnInit {
     }
 
     showConfirmation() {
+        this.showToaster()
+        console.log("in confirmation")
         alert('Request submitted, confirmation has been sent to your email');
-    }
+      }
 }

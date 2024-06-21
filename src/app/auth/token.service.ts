@@ -49,4 +49,15 @@ export class TokenService {
   
     return true;
   }
+  public getRoles(): string[] {
+    const token = this.loadToken();
+
+    if (token) {
+      const decoded = this.getPayload(token);
+
+      // Adjust here to match the payload structure
+      return decoded.roles ? decoded.roles.split(",") : [];
+    }
+    return [];
+  }
 }

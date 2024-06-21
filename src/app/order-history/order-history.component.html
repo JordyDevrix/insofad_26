@@ -1,3 +1,8 @@
+@if (notificationVisible) {
+    <div class="alert alert-success notification" style="margin-bottom: 20px;">
+        <p>Return request succesfull!</p>
+    </div>
+}
 <div class="container" style="margin-bottom: 1rem;">
     <ul class="list-group">
         <li class="list-group-item" style="background-color: white; border: 2px solid black;">
@@ -68,7 +73,7 @@
                 <form (ngSubmit)="submitReturnForm()">
                     <div class="form-group">
                         <label for="productDetails">Product Details:</label>
-                        <textarea id="productDetails" class="form-control" rows="3" (ngmodel)="productDetails" name="productDetails" readonly></textarea>
+                        <textarea id="productDetails" class="form-control" rows="3" (ngmodel)="productDetails" name="productDetails" readonly>{{productDetails}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="reason">Reason for Return:</label>
@@ -81,7 +86,7 @@
                             <option value="voucher">Voucher</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Submit Return Request</button>
+                    <button type="submit" class="btn btn-success" (click)="showConfirmation()" data-bs-dismiss="modal">Submit Return Request</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </form>
             </div>

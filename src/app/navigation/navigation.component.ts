@@ -8,6 +8,7 @@ import {AuthService} from '../auth/auth.service';
 import {OrderProduct} from "../models/orderproduct.model";
 import {AccountService} from "../services/account.service";
 import {Customer} from "../models/customer.model";
+import { TokenService } from '../auth/token.service';
 
 @Component({
     selector: 'app-navigation',
@@ -28,6 +29,7 @@ export class NavigationComponent implements OnInit {
         private authService: AuthService,
         private router: Router,
         private accountService: AccountService,
+        private tokenService: TokenService
     ) {}
 
     ngOnInit() {
@@ -41,6 +43,18 @@ export class NavigationComponent implements OnInit {
             this.checkLoginState();
         })
     }
+
+    isAdmin(): boolean {
+        const roles = this.tokenService.getRoles();
+        if(roles.includes('ADMIN')){
+    
+          return true
+        }
+        else{
+    
+          return false
+        }
+      }
 
     public checkLoginState() {
         this.authService

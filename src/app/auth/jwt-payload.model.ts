@@ -3,4 +3,5 @@ export class JwtPayload {
     public email: string;
     public exp: number;
     public iat: number;
+    public roles: string;
 }
