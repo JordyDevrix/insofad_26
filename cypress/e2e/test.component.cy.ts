@@ -16,13 +16,6 @@ describe('product page test', () =>{
 })
 
 describe('product order test', () =>{
-    beforeEach(function () {
-        cy.fixture('loginsucces.json').then((loginsucces) => {
-            localStorage.setItem('currentUser', loginsucces.email);
-            localStorage.setItem('token', loginsucces.token);
-        })
-    })
-
     it('should buy a product', function () {
         cy.intercept("POST", 'http://localhost:8080/api/orders', {fixture: 'loginsucces.json'})
         cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'products.json'})
@@ -31,23 +24,26 @@ describe('product order test', () =>{
         cy.intercept('POST', 'http://localhost:8080/api/account/login', {fixture: 'loginsucces.json'});
 
         cy.visit("localhost:4200")
-        cy.wait(400)
+        cy.wait(1000)
         cy.get('#dropdownMenu').click()
-        cy.wait(400)
+        cy.wait(1000)
         cy.contains('Login').click()
         cy.url().should("eq", "http://localhost:4200/account/login")
+        cy.wait(1000)
         cy.get('form').should('exist')
         cy.get('#email').type('bob@bobsluxuryenterprise.com')
         cy.get('#password1').type('Test123!')
         cy.get('#submit').click()
-        cy.wait(2000)
+        cy.wait(1000)
+
+        cy.get('#dropdownMenu').click()
+        cy.contains('Log out').should('exist')
 
         cy.contains('Products').click()
         cy.url().should("eq", "http://localhost:4200/products")
         cy.contains('Show detail').click()
         cy.get('ul').should('exist')
         cy.url().should("eq", "http://localhost:4200/products/1")
-        console.log(`The current user: ${localStorage.getItem('currentUser')}`)
         cy.get('#1').click()
         cy.contains('Cart').click()
         cy.get('#orderButton').click()
@@ -56,6 +52,12 @@ describe('product order test', () =>{
 
 describe('addmin panel acces', () =>{
     it('should visit admin page', function () {
+        cy.intercept("POST", 'http://localhost:8080/api/orders', {fixture: 'loginsucces.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'products.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products/1', {fixture: 'product1.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/account', {fixture: 'account.json'})
+        cy.intercept('POST', 'http://localhost:8080/api/account/login', {fixture: 'loginsucces.json'});
+
         cy.visit("localhost:4200")
         cy.wait(400)
         cy.get('#dropdownMenu').click()
