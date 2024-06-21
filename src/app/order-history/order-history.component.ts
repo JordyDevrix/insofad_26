@@ -6,6 +6,7 @@ import {CurrencyPipe} from '@angular/common';
 import {Customer} from '../models/customer.model';
 import {AccountService} from '../services/account.service';
 import {ShippingCostsService} from '../services/shippingcosts.service';
+import {CouponService} from '../services/coupon.service';
 
 @Component({
     standalone: true,
@@ -19,14 +20,15 @@ export class OrderHistoryComponent implements OnInit {
         private authService: AuthService,
         private accountService: AccountService,
         private shippingCostsService: ShippingCostsService
-    ) {
-    }
+    ) {}
 
     public orderList: Order[];
     shippingCosts: number = this.shippingCostsService.getShippingCosts();
     customer: Customer;
+    finalTotalPrice: number;
 
     ngOnInit() {
+        this.finalTotalPrice = this.orderService.getFinalTotalPrice();
         this.orderService
             .getOrders()
             .subscribe((orders: Order[]) => {
@@ -38,6 +40,7 @@ export class OrderHistoryComponent implements OnInit {
             this.customer = customer;
             console.log(this.customer);
         });
+        
     }
 }
 

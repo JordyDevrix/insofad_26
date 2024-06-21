@@ -55,7 +55,7 @@ export class CartComponent implements OnInit {
     getTotalPrice() {
         this.couponCosts = this.coupon ? this.coupon.price : 0;
         this.productsPrice = this.cartProducts.reduce((acc, curr) => acc + curr.productProperties.price, 0)
-        this.totalPrice = this.productsPrice + this.shippingCosts - this.couponCosts;
+        this.totalPrice = this.productsPrice + this.shippingCosts;
 
         if (isNaN(this.totalPrice)) {
             console.error("Total price calculation resulted in NaN");
@@ -65,7 +65,7 @@ export class CartComponent implements OnInit {
           return this.totalPrice; // Return toegevoegd voor gebruik van waarde in applyCoupon functie!
 
     }
-
+    
     onPlaceOrder() {
         if (this.cartProducts.length != 0) {
             this.order.products = this.cartProducts;
@@ -92,17 +92,24 @@ export class CartComponent implements OnInit {
   message: string;
   couponCosts : number = 0;
 
+//   getTotalPrice(): number {
+//     return this.couponService.getTotalPrice(this.cartProducts, this.shippingCosts, this.coupon);
+//   }
+
   public applyCoupon(couponTitle: string) {
     const totalPrice = this.getTotalPrice();
     this.couponService.applyCoupon(couponTitle, totalPrice).subscribe(
         (response) => {
             if (response && response.newTotal !== undefined && response.discount !== undefined) {
-                this.newTotal = response.newTotal;
+                this.newTotal = response.newTotal - response.discount;
                 this.couponCosts = response.discount;
                 this.message = 'Coupon applied successfully!';
                 console.log('Coupon applied successfully:', response);
                 console.log('Discount amount: ' + this.couponCosts);
                 console.log('New total price after applying coupon:', this.newTotal);
+
+                this.orderService.setFinalTotalPrice(this.newTotal);
+                this.totalPrice = this.newTotal;
             } else {
                 this.message = 'Coupon response does not contain expected data.'
                 console.error('Coupon response does not contain expected data:', response);

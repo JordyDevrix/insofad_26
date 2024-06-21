@@ -75,4 +75,26 @@ updateCoupon(title: string, status: boolean): Observable<any> {
 deleteCoupon(title: string): Observable<any> {
   return this.httpClient.delete<any>(`${this.mainURL}/${title}`);
 }
+
+getTotalPrice(cartProducts: any[], shippingCosts: number, coupon?: any): number {
+  let couponCosts = coupon ? coupon.price : 0;
+  let productsPrice = cartProducts.reduce((acc, curr) => acc + curr.productProperties.price, 0);
+
+  if (coupon) {
+    if (coupon.type === "%") {
+      couponCosts = (productsPrice * coupon.price) / 100;
+    } else if (coupon.type === "$") {
+      couponCosts = coupon.price;
+    }
+  }
+
+  let totalPrice = productsPrice + shippingCosts;
+  if (isNaN(totalPrice)) {
+    console.error("Total price calculation resulted in NaN");
+    return 0;
+  }
+
+  return totalPrice;
+}
+
 }
