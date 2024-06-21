@@ -21,6 +21,7 @@ describe('product order test', () =>{
         cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'products.json'})
         cy.intercept("GET", 'http://localhost:8080/api/products/1', {fixture: 'product1.json'})
         cy.intercept("GET", 'http://localhost:8080/api/account', {fixture: 'account.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/categories', {fixture: 'categories.json'})
         cy.intercept('POST', 'http://localhost:8080/api/account/login', {fixture: 'loginsucces.json'});
 
         cy.visit("localhost:4200")
@@ -56,6 +57,7 @@ describe('addmin panel acces', () =>{
         cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'products.json'})
         cy.intercept("GET", 'http://localhost:8080/api/products/1', {fixture: 'product1.json'})
         cy.intercept("GET", 'http://localhost:8080/api/account', {fixture: 'account.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/categories', {fixture: 'categories.json'})
         cy.intercept('POST', 'http://localhost:8080/api/account/login', {fixture: 'loginsucces.json'});
 
         cy.visit("localhost:4200")
@@ -76,6 +78,13 @@ describe('addmin panel acces', () =>{
 
 describe('adding a new product', () =>{
     it('should add a product', function () {
+        cy.intercept("POST", 'http://localhost:8080/api/orders', {fixture: 'loginsucces.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'products.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products/1', {fixture: 'product1.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/account', {fixture: 'account.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/categories', {fixture: 'categories.json'})
+        cy.intercept('POST', 'http://localhost:8080/api/account/login', {fixture: 'loginsucces.json'});
+
         cy.visit("localhost:4200")
         cy.wait(400)
         cy.get('#dropdownMenu').click()
@@ -104,6 +113,13 @@ describe('adding a new product', () =>{
 
 describe('removing a product', () =>{
     it('should remove a product', function () {
+        cy.intercept("POST", 'http://localhost:8080/api/orders', {fixture: 'loginsucces.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'products.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products/1', {fixture: 'product1.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/account', {fixture: 'account.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/categories', {fixture: 'categories.json'})
+        cy.intercept('POST', 'http://localhost:8080/api/account/login', {fixture: 'loginsucces.json'});
+
         cy.visit("localhost:4200")
         cy.wait(400)
         cy.get('#dropdownMenu').click()
@@ -127,6 +143,13 @@ describe('removing a product', () =>{
 
 describe('removing a variant', () =>{
     it('should remove a variant', function () {
+        cy.intercept("POST", 'http://localhost:8080/api/orders', {fixture: 'loginsucces.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'products.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products/1', {fixture: 'product1.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/account', {fixture: 'account.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/categories', {fixture: 'categories.json'})
+        cy.intercept('POST', 'http://localhost:8080/api/account/login', {fixture: 'loginsucces.json'});
+
         cy.visit("localhost:4200")
         cy.wait(400)
         cy.get('#dropdownMenu').click()
@@ -150,6 +173,13 @@ describe('removing a variant', () =>{
 
 describe('Buy stock', () =>{
     it('should add variant stock', function () {
+        cy.intercept("POST", 'http://localhost:8080/api/orders', {fixture: 'loginsucces.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'products.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products/1', {fixture: 'product1.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/account', {fixture: 'account.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/categories', {fixture: 'categories.json'})
+        cy.intercept('POST', 'http://localhost:8080/api/account/login', {fixture: 'loginsucces.json'});
+
         cy.visit("localhost:4200")
         cy.wait(400)
         cy.get('#dropdownMenu').click()
@@ -174,6 +204,13 @@ describe('Buy stock', () =>{
 
 describe('adding a new variant', () =>{
     it('should add variant', function () {
+        cy.intercept("POST", 'http://localhost:8080/api/orders', {fixture: 'loginsucces.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products', {fixture: 'products.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/products/1', {fixture: 'product1.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/account', {fixture: 'account.json'})
+        cy.intercept("GET", 'http://localhost:8080/api/categories', {fixture: 'categories.json'})
+        cy.intercept('POST', 'http://localhost:8080/api/account/login', {fixture: 'loginsucces.json'});
+
         cy.visit("localhost:4200")
         cy.wait(400)
         cy.get('#dropdownMenu').click()
