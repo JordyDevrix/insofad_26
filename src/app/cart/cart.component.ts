@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CurrencyPipe} from '@angular/common';
+import {CommonModule, CurrencyPipe} from '@angular/common';
 
 import {CartService} from '../services/cart.service';
 import {Product} from '../models/product.model';
@@ -8,11 +8,13 @@ import {AuthService} from '../auth/auth.service';
 import {Order} from '../models/order.model';
 import {OrderProduct} from "../models/orderproduct.model";
 import {ShippingCostsService} from "../services/shippingcosts.service";
+import { CouponService } from '../services/coupon.service';
+import { Coupon } from '../models/coupon.model';
 
 @Component({
     selector: 'app-cart',
     standalone: true,
-    imports: [CurrencyPipe],
+    imports: [CurrencyPipe, CommonModule],
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.scss'
 })
@@ -26,12 +28,14 @@ export class CartComponent implements OnInit {
         "products": [],
         "totalPrice": 0
     };
+    private coupon : Coupon;
 
     constructor(
         private cartService: CartService,
         private orderService: OrderService,
         private authService: AuthService,
-        private shippingCostsService: ShippingCostsService
+        private shippingCostsService: ShippingCostsService,
+        private couponService: CouponService
     ) {
     }
 
@@ -49,8 +53,17 @@ export class CartComponent implements OnInit {
     }
 
     getTotalPrice() {
+        this.couponCosts = this.coupon ? this.coupon.price : 0;
         this.productsPrice = this.cartProducts.reduce((acc, curr) => acc + curr.productProperties.price, 0)
-        this.totalPrice = this.productsPrice + this.shippingCosts;
+        this.totalPrice = this.productsPrice + this.shippingCosts - this.couponCosts;
+
+        if (isNaN(this.totalPrice)) {
+            console.error("Total price calculation resulted in NaN");
+            return 0;
+          }
+        
+          return this.totalPrice; // Return toegevoegd voor gebruik van waarde in applyCoupon functie!
+
     }
 
     onPlaceOrder() {
@@ -74,4 +87,31 @@ export class CartComponent implements OnInit {
                 this.userIsLoggedIn = loginState;
             });
     }
+
+  newTotal: number;
+  message: string;
+  couponCosts : number = 0;
+
+  public applyCoupon(couponTitle: string) {
+    const totalPrice = this.getTotalPrice();
+    this.couponService.applyCoupon(couponTitle, totalPrice).subscribe(
+        (response) => {
+            if (response && response.newTotal !== undefined && response.discount !== undefined) {
+                this.newTotal = response.newTotal;
+                this.couponCosts = response.discount;
+                this.message = 'Coupon applied successfully!';
+                console.log('Coupon applied successfully:', response);
+                console.log('Discount amount: ' + this.couponCosts);
+                console.log('New total price after applying coupon:', this.newTotal);
+            } else {
+                this.message = 'Coupon response does not contain expected data.'
+                console.error('Coupon response does not contain expected data:', response);
+            }
+        },
+        (error) => {
+            this.message = 'Error applying coupon.';;
+            console.error('Error applying coupon:', error);
+        }
+    );
+  }
 }
