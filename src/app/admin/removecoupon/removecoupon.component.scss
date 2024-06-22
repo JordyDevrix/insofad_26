@@ -1,0 +1,47 @@
+.coupon-actions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  
+  .coupon-block {
+    flex: 1;
+    margin: 0 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  .coupon-block h3 {
+    margin-bottom: 1rem;
+  }
+  
+  .coupon-block form {
+    display: none;
+    flex-direction: column;
+  }
+  
+  .coupon-block.active form {
+    display: flex;
+  }
+  
+  .coupon-block .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .coupon-block button {
+    align-self: flex-start;
+  }
+  
+  .coupon-list {
+    flex: 1;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  

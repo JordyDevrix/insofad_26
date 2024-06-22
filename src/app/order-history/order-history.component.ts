@@ -8,14 +8,14 @@ import { AccountService } from "../services/account.service";
 import { ShippingCostsService } from "../services/shippingcosts.service";
 import { ReturnRequestService } from "../services/return-request.service";
 import { ReturnRequest } from "../models/return-request.model";
-
-declare var bootstrap: any;
+import {CouponService} from '../services/coupon.service';
 
 @Component({
   selector: "app-order-history",
   styleUrls: ["./order-history.component.scss"],
   templateUrl: "./order-history.component.html",
 })
+
 export class OrderHistoryComponent implements OnInit {
   customer: Customer | undefined;
   selectedOrder: Order | null = null;
@@ -28,6 +28,7 @@ export class OrderHistoryComponent implements OnInit {
   shippingCosts: number;
   notificationVisible: boolean = false;
   customerReturns: ReturnRequest[] = [];
+  finalTotalPrice: number;
 
   constructor(
     private orderService: OrderService,
@@ -40,9 +41,16 @@ export class OrderHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.finalTotalPrice = this.orderService.getFinalTotalPrice();
+        this.orderService
+            .getOrders()
+            .subscribe((orders: Order[]) => {
+                this.orderList = orders;
+                console.log(this.orderList);
+            });
+
     this.accountService.getCustomer().subscribe((customer: Customer) => {
       this.customer = customer;
-      console.log(this.customer);
       this.loadCustomerReturns(customer.id);
       this.loadOrders();
     });
