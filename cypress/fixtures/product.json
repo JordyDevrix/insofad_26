@@ -1,0 +1,388 @@
+[
+    {
+        "id": 1,
+        "name": "Oyster perpetual",
+        "imagePath": "https://schapi-products.s3.eu-central-1.amazonaws.com/3523842/m228238-0061_modelpage_front_facing_landscape.png",
+        "description": "Expensive ah collectors item",
+        "productProperties": [
+            {
+                "id": 1,
+                "size": "S",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 40000
+            },
+            {
+                "id": 2,
+                "size": "M",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 40001
+            },
+            {
+                "id": 3,
+                "size": "X",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 40002
+            }
+        ],
+        "brand": "Rolex",
+        "category": {
+            "id": 1,
+            "name": "Watches"
+        }
+    },
+    {
+        "id": 2,
+        "name": "Gold chain",
+        "imagePath": "https://i.ebayimg.com/images/g/8j8AAOSwWktaaFRP/s-l1200.webp",
+        "description": "A big, heavy gold chain",
+        "productProperties": [
+            {
+                "id": 4,
+                "size": "S",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 15000
+            },
+            {
+                "id": 5,
+                "size": "M",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 15000
+            },
+            {
+                "id": 6,
+                "size": "X",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 15000
+            }
+        ],
+        "brand": null,
+        "category": {
+            "id": 3,
+            "name": "Necklaces"
+        }
+    },
+    {
+        "id": 3,
+        "name": "Diamond ring",
+        "imagePath": "https://idjewelry.com/media/catalog/product/cache/6772f233b6ab10acdab5c36a45eb28cd/1/2/12baf843a62e47d3db2d9fe9820c37b7.jpg",
+        "description": "Thousands of tiny diamonds",
+        "productProperties": [
+            {
+                "id": 7,
+                "size": "S",
+                "color": "Diamond",
+                "material": "Diamond",
+                "stock": 400,
+                "price": 125000
+            },
+            {
+                "id": 8,
+                "size": "M",
+                "color": "Diamond",
+                "material": "Diamond",
+                "stock": 400,
+                "price": 125000
+            },
+            {
+                "id": 9,
+                "size": "X",
+                "color": "Diamond",
+                "material": "Diamond",
+                "stock": 400,
+                "price": 125000
+            },
+            {
+                "id": 10,
+                "size": "XL",
+                "color": "Diamond",
+                "material": "Diamond",
+                "stock": 400,
+                "price": 125000
+            }
+        ],
+        "brand": null,
+        "category": {
+            "id": 2,
+            "name": "Rings"
+        }
+    },
+    {
+        "id": 4,
+        "name": "Vintage watch",
+        "imagePath": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQbutRSQI54h9aDmDKvLkGGfiZZlf3hlCdoZMK8qZ79J20A5ReXuwv9A2mWGVyyNYg9bBPlGFRAyT8ih6k7mnu8VydAh9UjfRPlfMtDvuw_jWbJdPTYZvm5&usqp=CAE",
+        "description": "Made in 1939",
+        "productProperties": [
+            {
+                "id": 11,
+                "size": "S",
+                "color": "Brown",
+                "material": "Leather",
+                "stock": 400,
+                "price": 20000
+            },
+            {
+                "id": 12,
+                "size": "M",
+                "color": "Brown",
+                "material": "Leather",
+                "stock": 400,
+                "price": 20000
+            },
+            {
+                "id": 13,
+                "size": "X",
+                "color": "Brown",
+                "material": "Leather",
+                "stock": 400,
+                "price": 20000
+            }
+        ],
+        "brand": null,
+        "category": {
+            "id": 1,
+            "name": "Watches"
+        }
+    },
+    {
+        "id": 5,
+        "name": "L'incomparable",
+        "imagePath": "https://4cs.gia.edu/wp-content/uploads/2013/04/Incomparable-400.png",
+        "description": "Worlds most expensive necklace",
+        "productProperties": [
+            {
+                "id": 14,
+                "size": "S",
+                "color": "Silver",
+                "material": "Silver",
+                "stock": 400,
+                "price": 550000
+            },
+            {
+                "id": 15,
+                "size": "M",
+                "color": "Silver",
+                "material": "Silver",
+                "stock": 400,
+                "price": 550000
+            },
+            {
+                "id": 16,
+                "size": "X",
+                "color": "Silver",
+                "material": "Silver",
+                "stock": 400,
+                "price": 550000
+            }
+        ],
+        "brand": null,
+        "category": {
+            "id": 3,
+            "name": "Necklaces"
+        }
+    },
+    {
+        "id": 6,
+        "name": "Los lentes de sol",
+        "imagePath": "https://eyeonoptics.com.au/media/nsrj5v1f/dolce-and-gabbana.jpg",
+        "description": "For classy sun-protection",
+        "productProperties": [
+            {
+                "id": 17,
+                "size": "S",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 95000
+            },
+            {
+                "id": 18,
+                "size": "M",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 95000
+            },
+            {
+                "id": 19,
+                "size": "X",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 95000
+            }
+        ],
+        "brand": "Dolce & Gabbana",
+        "category": {
+            "id": 4,
+            "name": "Accessories"
+        }
+    },
+    {
+        "id": 7,
+        "name": "Geneva Magnificent",
+        "imagePath": "https://robbreport.com/wp-content/uploads/2020/11/2020_GNV_18970_0354_000exceptional_pair_of_diamond_and_coloured_diamond_earrings061852-2.gif",
+        "description": "Three-colored piece of beauty",
+        "productProperties": [
+            {
+                "id": 20,
+                "size": "One size fits all",
+                "color": "Diamond",
+                "material": "Diamond",
+                "stock": 400,
+                "price": 820000
+            }
+        ],
+        "brand": null,
+        "category": {
+            "id": 4,
+            "name": "Accessories"
+        }
+    },
+    {
+        "id": 8,
+        "name": "Eagle belt",
+        "imagePath": "https://i.pinimg.com/originals/c3/1b/43/c31b4383b95307094498912839164283.jpg",
+        "description": "Made from real crocodile leather",
+        "productProperties": [
+            {
+                "id": 21,
+                "size": "S",
+                "color": "Black",
+                "material": "Leather",
+                "stock": 400,
+                "price": 62000
+            },
+            {
+                "id": 22,
+                "size": "M",
+                "color": "Black",
+                "material": "Leather",
+                "stock": 400,
+                "price": 62000
+            },
+            {
+                "id": 23,
+                "size": "X",
+                "color": "Black",
+                "material": "Leather",
+                "stock": 400,
+                "price": 62000
+            },
+            {
+                "id": 24,
+                "size": "XL",
+                "color": "Black",
+                "material": "Leather",
+                "stock": 400,
+                "price": 62000
+            }
+        ],
+        "brand": "Montblanc",
+        "category": {
+            "id": 4,
+            "name": "Accessories"
+        }
+    },
+    {
+        "id": 9,
+        "name": "Crown ring",
+        "imagePath": "https://nationaljeweler.com/uploads/ff952437c9c312c4e84ca8f31d155d6f.jpg",
+        "description": "To make you feel like a king",
+        "productProperties": [
+            {
+                "id": 25,
+                "size": "S",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 160000
+            },
+            {
+                "id": 26,
+                "size": "M",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 160000
+            },
+            {
+                "id": 27,
+                "size": "X",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 160000
+            },
+            {
+                "id": 28,
+                "size": "XL",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 160000
+            }
+        ],
+        "brand": null,
+        "category": {
+            "id": 2,
+            "name": "Rings"
+        }
+    },
+    {
+        "id": 10,
+        "name": "Mysterious ring",
+        "imagePath": "https://upload.wikimedia.org/wikipedia/commons/d/d4/One_Ring_Blender_Render.png",
+        "description": "The one to rule them all",
+        "productProperties": [
+            {
+                "id": 29,
+                "size": "S",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 0
+            },
+            {
+                "id": 30,
+                "size": "M",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 0
+            },
+            {
+                "id": 31,
+                "size": "X",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 0
+            },
+            {
+                "id": 32,
+                "size": "XL",
+                "color": "Gold",
+                "material": "Gold",
+                "stock": 400,
+                "price": 0
+            }
+        ],
+        "brand": null,
+        "category": {
+            "id": 2,
+            "name": "Rings"
+        }
+    }
+]
