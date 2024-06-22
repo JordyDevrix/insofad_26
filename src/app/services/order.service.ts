@@ -13,6 +13,7 @@ import { Order } from '../models/order.model';
 export class OrderService {
   private baseUrl: string = environment.base_url + "/orders";
   products: Product[] = [];
+  private finalTotalPrice: number = 0;
 
   constructor(private http: HttpClient) {}
 
@@ -26,5 +27,13 @@ export class OrderService {
 
   public getAllOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this.baseUrl + "/all")
+  }
+
+  setFinalTotalPrice(price: number): void {
+    this.finalTotalPrice = price;
+  }
+
+  getFinalTotalPrice(): number {
+    return this.finalTotalPrice;
   }
 }
