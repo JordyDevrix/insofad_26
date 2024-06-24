@@ -7,11 +7,13 @@ import { ProductsModule } from './products/products.module';
 import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ProductsModule, NavigationComponent, FooterComponent, AuthModule],
+  imports: [CommonModule, RouterOutlet, ProductsModule, NavigationComponent, FooterComponent, AuthModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

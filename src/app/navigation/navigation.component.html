@@ -42,11 +42,9 @@
                 @if (userIsLoggedIn) {
                     <li><a class="dropdown-item" routerLink="/orders" style="cursor: pointer;">View profile</a></li>
                     <li><a class="dropdown-item" (click)="onLogout()" style="cursor: pointer;">Log out</a></li>
-                    @if (admin == "ROLE_ADMIN") {
-                        <li class="dropdown-item">
-                            <a class="nav-link" routerLink="/admin">Admin</a>
-                        </li>
-                    }
+                    <div *ngIf="userIsLoggedIn && isAdmin()">
+                        <li><a class="dropdown-item" routerLink="/admin" style="cursor: pointer;">Admin Panel</a></li>
+                      </div> 
                 } @else {
                     <li><a class="dropdown-item" routerLink="/account/login" style="cursor: pointer;">Login</a></li>
                     <li><a class="dropdown-item" routerLink="/account/register" style="cursor: pointer;">Register</a>
