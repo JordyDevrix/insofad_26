@@ -1,140 +1,284 @@
-@if (notificationVisible) {
-    <div class="alert alert-success notification" style="margin-bottom: 20px;">
-        <p>Return request successful!</p>
-    </div>
-}
-<div class="container" style="margin-bottom: 1rem;">
-    <ul class="list-group">
-        <li class="list-group-item" style="background-color: white; border: 2px solid black;">
-            <div id="customerInfo">
-                @if(customer){
-                    <h5>First name: </h5>
-                    <p>{{ customer.firstName }}</p>
-                    <h5>Last name: </h5>
-                    <p>{{ customer.lastName }}</p>
-                    <h5>Email: </h5>
-                    <p>{{ customer.email }}</p>
-                }
-            </div>
-        </li>
-    </ul>
+<!-- Notification Banner -->
+<div
+  *ngIf="notificationVisible"
+  class="alert alert-success notification"
+  style="margin-bottom: 20px"
+  data-cy="notification"
+>
+  <p>Return request successful!</p>
 </div>
 
-<h3 style="text-align: center;">Order History</h3>
-@if (orderList.length != 0) {
-    @for (order of orderList; track $index) {
-        <div class="container" style="margin-bottom: 1rem;">
-            <ul class="list-group">
-                <li class="list-group-item" style="background-color: white; border: 2px solid black;">
-                    Order number: {{ order.id ?? 'N/A' }} <br>
-                    Order status: {{ order.orderStatus }}
-                    <button (click)="openReturnForm(order)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#returnModal">Request Return</button>
-                    <hr>
-                    @for (product of order.products; track $index) {
-                        <div class="product" style="display: flex; align-items: center; margin-bottom: 0.5rem">
-                            <img style="margin-right: 20px;" src="{{ product.imagePath }}" alt="{{ product.name }}">
-                            <div id="name">
-                                <h4>{{ product.brand }} {{ product.name }}</h4>
-                                <p>{{ product.price | currency }}</p>
-                            </div>
-                            <div id="details">
-                                <p>Color: {{ product.color }}</p>
-                                <p>Material: {{ product.material }}</p>
-                                <p>Size: {{ product.size }}</p>
-                            </div>
-                        </div>
-                    }
-                    <hr>    
-                    <p>
-                        Total price: {{ order.totalPrice | currency }}
-                        (Including {{ shippingCosts | currency }} shipping costs)
-                    </p>
-                </li>
-            </ul>
-        </div>
-    }
-} @else {
-    <div class="container" style="margin-bottom: 1rem;">
-        <ul class="list-group">
-            <li class="list-group-item" style="background-color: white; border: 2px solid black;">
-                <p style="text-align: center; margin: 10px;">You don't have any previous orders!</p>
-            </li>
-        </ul>
-    </div>
-}
+<!-- Customer Info -->
+<div class="container" style="margin-bottom: 1rem">
+  <ul class="list-group">
+    <li
+      class="list-group-item"
+      style="background-color: white; border: 2px solid black"
+      *ngIf="customer"
+    >
+      <h5>First name:</h5>
+      <p>{{ customer.firstName }}</p>
+      <h5>Last name:</h5>
+      <p>{{ customer.lastName }}</p>
+      <h5>Email:</h5>
+      <p>{{ customer.email }}</p>
+    </li>
+  </ul>
+</div>
 
-<h2>Your Return Requests</h2>
-@if (returnedOrders.length != 0) {
-    @for (order of returnedOrders; track $index) {
-        <div class="container" style="margin-bottom: 1rem;">
-            <ul class="list-group">
-                <li class="list-group-item" style="background-color: white; border: 2px solid black;">
-                    Order number: {{ order.id ?? 'N/A' }} <br>
-                    Order status: Returned
-                    <hr>
-                    @for (product of order.products; track $index) {
-                        <div class="product" style="display: flex; align-items: center; margin-bottom: 0.5rem">
-                            <img style="margin-right: 20px;" src="{{ product.imagePath }}" alt="{{ product.name }}">
-                            <div id="name">
-                                <h4>{{ product.brand }} {{ product.name }}</h4>
-                                <p>{{ product.price | currency }}</p>
-                            </div>
-                            <div id="details">
-                                <p>Color: {{ product.color }}</p>
-                                <p>Material: {{ product.material }}</p>
-                                <p>Size: {{ product.size }}</p>
-                            </div>
-                        </div>
-                    }
-                    <hr>    
-                    <p>
-                        Total price: {{ order.totalPrice | currency }}
-                        (Including {{ shippingCosts | currency }} shipping costs)
-                    </p>
-                </li>
-            </ul>
+<!-- Order History -->
+<h3 style="text-align: center">Order History</h3>
+<div *ngIf="orderList.length > 0">
+  <div
+    *ngFor="let order of orderList; let $index = index"
+    class="container"
+    style="margin-bottom: 1rem"
+  >
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        style="background-color: white; border: 2px solid black"
+        data-cy="order-item"
+      >
+        Order number: {{ order.id ?? "N/A" }} <br />
+        Order status: {{ order.orderStatus }}
+        <button
+          (click)="openReturnForm(order)"
+          data-cy="request-return"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#returnModal"
+        >
+          Request Return
+        </button>
+        <hr />
+        <div
+          *ngFor="let product of order.products; let $index = index"
+          class="product"
+          style="display: flex; align-items: center; margin-bottom: 0.5rem"
+        >
+          <img
+            style="margin-right: 20px"
+            [src]="product.imagePath"
+            [alt]="product.name"
+          />
+          <div id="name">
+            <h4>{{ product.brand }} {{ product.name }}</h4>
+            <p>{{ product.price | currency }}</p>
+          </div>
+          <div id="details">
+            <p>Color: {{ product.color }}</p>
+            <p>Material: {{ product.material }}</p>
+            <p>Size: {{ product.size }}</p>
+          </div>
         </div>
-    }
-} @else {
-    <div class="container" style="margin-bottom: 1rem;">
-        <ul class="list-group">
-            <li class="list-group-item" style="background-color: white; border: 2px solid black;">
-                <p style="text-align: center; margin: 10px;">You don't have any return requests!</p>
-            </li>
-        </ul>
-    </div>
-}
+        <hr />
+        <p>
+          Total price: {{ order.totalPrice | currency }} (Including
+          {{ shippingCosts | currency }} shipping costs)
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
+<div
+  *ngIf="orderList.length === 0"
+  class="container"
+  style="margin-bottom: 1rem"
+  data-cy="no-orders"
+>
+  <ul class="list-group">
+    <li
+      class="list-group-item"
+      style="background-color: white; border: 2px solid black"
+    >
+      <p style="text-align: center; margin: 10px">
+        You don't have any previous orders!
+      </p>
+    </li>
+  </ul>
+</div>
 
-@if (showReturnForm) {
-    <div class="modal fade" id="returnModal" tabindex="-1" aria-labelledby="returnModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="returnModalLabel">Return Request for Order {{ selectedOrder?.id ?? 'N/A' }}</h5>
-                    <button type="button" class="btn-close" (click)="closeReturnForm()" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form (submit)="submitReturnRequest()">
-                        <div class="form-group">
-                            <label for="productDetails">Product Details:</label>
-                            <textarea id="productDetails" class="form-control" rows="3" readonly>{{ productDetails }}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="reason">Reason for Return:</label>
-                            <textarea id="reason" class="form-control" rows="3" name="reason" [(ngModel)]="reason" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="preferredHandling">Preferred Handling:</label>
-                            <select id="preferredHandling" class="form-control" name="preferredHandling" [(ngModel)]="preferredHandling" required>
-                                <option value="refund">Refund</option>
-                                <option value="voucher">Voucher</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-success">Submit Return Request</button>
-                        <button type="button" class="btn btn-secondary" (click)="closeReturnForm()">Cancel</button>
-                    </form>
-                </div>
+<!-- Return Requests -->
+<h2 data-cy="return-requests-title">Your Return Requests</h2>
+<div
+  *ngIf="showReturnForm"
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  style="display: block"
+  data-cy="return-modal"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="returnModalLabel">
+          Return Request for Order {{ selectedOrder?.id ?? "N/A" }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeReturnForm()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="submitReturnRequest()" data-cy="return-form">
+          <div class="form-group">
+            <label for="productDetails">Product Details:</label>
+            <textarea
+              id="productDetails"
+              class="form-control"
+              rows="3"
+              readonly
+              >{{ productDetails }}</textarea
+            >
+          </div>
+          <div class="form-group">
+            <label for="reason">Reason for Return:</label>
+            <textarea
+              id="reason"
+              class="form-control"
+              rows="3"
+              name="reason"
+              [(ngModel)]="reason"
+              required
+              data-cy="reason-input"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="preferredHandling">Preferred Handling:</label>
+            <select
+              id="preferredHandling"
+              class="form-control"
+              name="preferredHandling"
+              [(ngModel)]="preferredHandling"
+              required
+              data-cy="handling-select"
+            >
+              <option value="refund">Refund</option>
+              <option value="voucher">Voucher</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success" data-cy="submit-return">
+            Submit Return Request
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeReturnForm()"
+          >
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="returnedOrders.length === 0"
+  class="container"
+  style="margin-bottom: 1rem"
+  data-cy="no-return-requests"
+>
+  <ul class="list-group">
+    <li
+      class="list-group-item"
+      style="background-color: white; border: 2px solid black"
+    >
+      <p style="text-align: center; margin: 10px">
+        You don't have any return requests!
+      </p>
+    </li>
+  </ul>
+</div>
+
+<div
+  *ngIf="showReturnForm"
+  class="modal fade"
+  id="returnModal"
+  tabindex="-1"
+  aria-labelledby="returnModalLabel"
+  aria-hidden="true"
+  data-cy="return-modal"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="returnModalLabel">
+          Return Request for Order {{ selectedOrder?.id ?? "N/A" }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeReturnForm()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="submitReturnRequest()" data-cy="return-form">
+          <div class="form-group">
+            <label for="productDetails">Product Details:</label>
+            <textarea
+              id="productDetails"
+              class="form-control"
+              rows="3"
+              readonly
+              >{{ productDetails }}</textarea
+            >
+          </div>
+          <div class="form-group">
+            <label for="reason">Reason for Return:</label>
+            <textarea
+              id="reason"
+              class="form-control"
+              rows="3"
+              name="reason"
+              [(ngModel)]="reason"
+              required
+              data-cy="reason-input"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="preferredHandling">Preferred Handling:</label>
+            <select
+              id="preferredHandling"
+              class="form-control"
+              name="preferredHandling"
+              [(ngModel)]="preferredHandling"
+              required
+              data-cy="handling-select"
+            >
+              <option value="refund">Refund</option>
+              <option value="voucher">Voucher</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success" data-cy="submit-return">
+            Submit Return Request
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeReturnForm()"
+          >
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Return Request Modal -->
+<!-- <div  class="modal fade" id="returnModal" tabindex="-1" aria-labelledby="returnModalLabel" aria-hidden="true" data-cy="return-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="returnModalLabel">Return Request for Order {{ selectedOrder?.id ?? 'N/A' }}</h5>
+                <button type="button" class="btn-close" (click)="closeReturnForm()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
             </div>
         </div>
     </div>
-}
+</div> -->

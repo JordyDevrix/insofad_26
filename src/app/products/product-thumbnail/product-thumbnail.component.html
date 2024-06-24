@@ -9,7 +9,7 @@
             <hr>
             <div style="text-align: center;">
 <!--              <button (click)="buyProduct(product)">Add to cart</button>-->
-                <a [routerLink]="[product.id]" class="btn btn-secondary">
+                <a [routerLink]="[product.id]" class="btn btn-secondary" data-cy="details-button">
                     Show detail</a>
               <p>{{ product.productProperties[0].price | currency }}</p>
             </div>

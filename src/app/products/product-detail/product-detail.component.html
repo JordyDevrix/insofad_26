@@ -18,7 +18,7 @@
                     Material {{ property.material }} -
                     <strong>Price: {{ property.price | currency }}</strong>
                 </p>
-                <button (click)="buyProduct(product, $index)" class="btn btn-primary p-2" id="{{ $index }}"
+                <button (click)="buyProduct(product, $index)" data-cy="add-product" class="btn btn-primary p-2" id="{{ $index }}"
                         style="margin-left: 1em; border-radius: 1000px;" [ngStyle]="{'color': clickedStyle}"
                         *ngIf="userIsLoggedIn">
                     {{ text }}
