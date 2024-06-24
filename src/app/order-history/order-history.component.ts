@@ -93,8 +93,9 @@ export class OrderHistoryComponent implements OnInit {
   closeReturnForm() {
     const modalElement = document.getElementById('returnModal');
     if (modalElement) {
-      const modalInstance = bootstrap.Modal.getInstance(modalElement);
-      modalInstance.hide();
+      // const modalInstance = bootstrap.Modal.getInstance(modalElement);
+      // modalInstance.hide();
+      window.location.reload()
     }
     this.selectedOrder = null;
     this.showReturnForm = false;
